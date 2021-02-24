@@ -4,6 +4,7 @@ import styles from "../styles/pages/Home.module.css"
 import { CompletedChallenges } from "../Components/CompletedChallenges";
 import { Countdown } from "../Components/Countdown";
 import Head from 'next/head';
+import { ChallengeBox } from "../Components/ChallengeBox";
 
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
           <Countdown />
         </div>
         <div>
+          <ChallengeBox />
 
 
         </div>
