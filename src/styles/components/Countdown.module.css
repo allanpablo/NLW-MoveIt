@@ -68,4 +68,10 @@
     background: var(--white);
     color: var(--text);
     cursor: not-allowed;
+    border-bottom:0.4rem solid var(--green) ;
 }
+
+.countdownButton img{
+    width:1.5rem;
+}
+
