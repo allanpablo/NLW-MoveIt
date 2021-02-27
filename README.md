@@ -3,14 +3,23 @@
 </h1>
 
 <p align="center">
-  <a href="#technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-preview">Preview</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-layout">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-license">License</a>
 </p>
+<p align="center">
+  <a href="https://github.com/csorlandi">
+    <img alt="Made ApK" src="https://img.shields.io/badge/AllanPablo - ApK">
+  </a>
 
+  <img alt="Last Commit" src="https://img.shields.io/github/last-commit/allanpablo/moveit?color=rgb(89,101,224)">
+
+
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361?color=rgb(89,101,224)">
+</p>
 <h1 align="center">
     <img alt="Move.it" title="Move.it" src="/public/Macbook.png" />
 </h1>
@@ -25,10 +34,14 @@
 
   <img src="https://img.shields.io/github/stars/allanpablo/moveit?label=stars&message=MIT&color=5965E0&labelColor=121214" alt="Stars">
 </p>
+<p align="center">Move.it is a project created by 🚀 Rocketseat initially to be a platform that combines the technique of :tomato: pomodoro, which consists of alternating cycles of :office: focus and :zzz: rest, with exercises for well-being for those who spend many hours in front of a computer, which can be harmful to health when you do no exercise or take periods of rest!</p>
+
 
 <p align="center">
   <img alt="Moveit" src="/public/favicon.png" width="120px">
 </p>
+
+
 
 ## 🧪 Technologies
 
@@ -61,7 +74,7 @@ $ yarn dev
 
 ## 💻 Project
 
-[Move.it](https://moveit-apk.vercel.app/) came to remind you to exercise always! 💜 
+[Move.it](https://moveit-apk.vercel.app/) I came to remind you to exercise always, for long working in your devices, rest your eyes and stretch your body periodically! 💜 
 
 This is a project developed during the **[Next Level Week](https://nextlevelweek.com/)**, presented by **[@Rocketseat](https://github.com/Rocketseat)** during February 22-28, 2021.
 
