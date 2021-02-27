@@ -84,6 +84,8 @@ You can view the project layout through the links below:
 
 - [Layout Web](https://www.figma.com/file/ge20pu3ofMOKoliUyKx1Nl/Move.it-1.0) 
 
+- [Layout Web 2.0](https://www.figma.com/file/KYIIeK6k3Kw66m4ioNsUoG/Move.it-2.0)
+
 Remembering that you need to have a [Figma](http://figma.com/) account to access it.
 
 ## 📝 License
