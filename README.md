@@ -19,6 +19,9 @@
 
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361?color=rgb(89,101,224)">
+  <img src="https://img.shields.io/github/forks/allanpablo/moveit?label=forks&message=MIT&color=5965E0&labelColor=121214" alt="Forks">     
+
+  <img src="https://img.shields.io/github/stars/allanpablo/moveit?label=stars&message=MIT&color=5965E0&labelColor=121214" alt="Stars">
 </p>
 <h1 align="center">
     <img alt="Move.it" title="Move.it" src="/public/Macbook.png" />
@@ -27,13 +30,6 @@
     <img alt="Move.it" title="Move.it" src="/public/iMac_2.png" />
 </h1>
 
-<p align="center">
-  <img  src="https://img.shields.io/static/v1?label=license&message=MIT&color=5965E0&labelColor=121214" alt="License">
-  
-  <img src="https://img.shields.io/github/forks/allanpablo/moveit?label=forks&message=MIT&color=5965E0&labelColor=121214" alt="Forks">     
-
-  <img src="https://img.shields.io/github/stars/allanpablo/moveit?label=stars&message=MIT&color=5965E0&labelColor=121214" alt="Stars">
-</p>
 <p align="center">Move.it is a project created by 🚀 Rocketseat initially to be a platform that combines the technique of :tomato: pomodoro, which consists of alternating cycles of :office: focus and :zzz: rest, with exercises for well-being for those who spend many hours in front of a computer, which can be harmful to health, when you don't make exercise or take periods of rest!</p>
 
 
