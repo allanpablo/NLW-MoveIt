@@ -11,7 +11,7 @@
   <a href="#-license">License</a>
 </p>
 <p align="center">
-  <a href="https://github.com/csorlandi">
+  <a href="https://github.com/allanpablo">
     <img alt="Made ApK" src="https://img.shields.io/badge/AllanPablo - ApK">
   </a>
 
