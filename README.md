@@ -34,7 +34,7 @@
 
   <img src="https://img.shields.io/github/stars/allanpablo/moveit?label=stars&message=MIT&color=5965E0&labelColor=121214" alt="Stars">
 </p>
-<p align="center">Move.it is a project created by 🚀 Rocketseat initially to be a platform that combines the technique of :tomato: pomodoro, which consists of alternating cycles of :office: focus and :zzz: rest, with exercises for well-being for those who spend many hours in front of a computer, which can be harmful to health when you do no exercise or take periods of rest!</p>
+<p align="center">Move.it is a project created by 🚀 Rocketseat initially to be a platform that combines the technique of :tomato: pomodoro, which consists of alternating cycles of :office: focus and :zzz: rest, with exercises for well-being for those who spend many hours in front of a computer, which can be harmful to health, when you don't make exercise or take periods of rest!</p>
 
 
 <p align="center">
