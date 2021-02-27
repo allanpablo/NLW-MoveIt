@@ -19,9 +19,9 @@
 
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361?color=rgb(89,101,224)">
-  <img src="https://img.shields.io/github/forks/allanpablo/moveit?label=forks&message=MIT&color=5965E0&labelColor=121214" alt="Forks">     
+  <img src="https://img.shields.io/github/forks/allanpablo/moveit?color=rgb(89,101,224)" alt="Forks">     
 
-  <img src="https://img.shields.io/github/stars/allanpablo/moveit?label=stars&message=MIT&color=5965E0&labelColor=121214" alt="Stars">
+  <img src="https://img.shields.io/github/stars/allanpablo/moveit??color=rgb(89,101,224)" alt="Stars">
 </p>
 <h1 align="center">
     <img alt="Move.it" title="Move.it" src="/public/Macbook.png" />
