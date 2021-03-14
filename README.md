@@ -49,7 +49,7 @@ This project was developed using the following technologies:
 
 ## 🔥 Preview
 
-[![Deploy with Vercel](https://vercel.com/button)](https://move-it-ruby-one.vercel.app/)
+[![Deploy with Vercel](https://vercel.com/button)](https://moveit-apk.vercel.app/)
 
 ## 🚀 Getting started
 
