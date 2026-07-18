@@ -88,6 +88,9 @@ interface ChallengesContextData {
     closeSettingsModal: () => void;
     updatePassword: (newPass: string) => void;
     updateProfile: (name: string, company: string, sector: string, avatar: string) => void;
+    isSquadModalOpen: boolean;
+    openSquadModal: () => void;
+    closeSquadModal: () => void;
 }
 
 interface ChallengesProviderProps {
@@ -161,6 +164,7 @@ export function ChallengesProvider({
 
   const [breakTaskCompleted, setBreakTaskCompleted] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [isSquadModalOpen, setIsSquadModalOpen] = useState(false);
 
   function openSettingsModal() {
     setIsSettingsModalOpen(true);
@@ -168,6 +172,14 @@ export function ChallengesProvider({
 
   function closeSettingsModal() {
     setIsSettingsModalOpen(false);
+  }
+
+  function openSquadModal() {
+    setIsSquadModalOpen(true);
+  }
+
+  function closeSquadModal() {
+    setIsSquadModalOpen(false);
   }
 
   function updatePassword(newPass: string) {
@@ -593,7 +605,10 @@ export function ChallengesProvider({
           openSettingsModal,
           closeSettingsModal,
           updatePassword,
-          updateProfile
+          updateProfile,
+          isSquadModalOpen,
+          openSquadModal,
+          closeSquadModal
         }}
     >
       {children}
