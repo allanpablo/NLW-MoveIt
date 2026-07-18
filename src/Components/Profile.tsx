@@ -3,38 +3,28 @@ import { ChallengesContext, ALL_BADGES } from '../contexts/ChallengesContext';
 import styles from '../styles/components/Profile.module.css';
 
 export function Profile(){
-    const { level, currentStreak, unlockedBadges, userName, userAvatar, userSector, userCompany } = useContext(ChallengesContext);
-
-    const sectorName = userSector === 'ti' ? 'TI & Engenharia' 
-                     : userSector === 'vendas' ? 'Vendas & Growth'
-                     : userSector === 'rh' ? 'Recursos Humanos'
-                     : userSector === 'financeiro' ? 'Financeiro'
-                     : userSector === 'marketing' ? 'Marketing' : 'Geral';
+    const { level, currentStreak, unlockedBadges } = useContext(ChallengesContext);
 
     return(
         <div className={styles.profileArea}>
-            <div className={styles.profileContainer}>
-                <img src={userAvatar || "https://github.com/allanpablo.png"} alt={userName || "Usuário"}/>
-                <div>
-                    <div className={styles.nameRow}>
-                        <strong>{userName || "Allan Pablo"}</strong>
+            <div className={styles.statsOverviewContainer}>
+                <div className={styles.statItem}>
+                    <img src="icons/level.svg" alt="Level" />
+                    <div>
+                        <span>Nível Atual</span>
+                        <strong>Level {level}</strong>
                     </div>
-                    <p className={styles.sectorMeta}>
-                      Empresa: <strong>{userCompany || "Geral"}</strong>
-                    </p>
-                    <p className={styles.sectorMeta}>
-                      Setor: <span>{sectorName}</span>
-                    </p>
-                    <p>
-                      <img src="icons/level.svg" alt="Level"/>
-                      Level {level}
-                    </p>
-                    {currentStreak > 0 && (
-                        <span className={styles.streakBadge}>
-                            🔥 {currentStreak} {currentStreak === 1 ? 'Ciclo' : 'Ciclos'} Seguidos
-                        </span>
-                    )}
                 </div>
+
+                {currentStreak > 0 && (
+                    <div className={styles.statItem}>
+                        <span className={styles.fireIcon}>🔥</span>
+                        <div>
+                            <span>Foco Ativo</span>
+                            <strong>{currentStreak} {currentStreak === 1 ? 'Ciclo' : 'Ciclos'}</strong>
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className={styles.badgesContainer}>
