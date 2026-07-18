@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { action, email, name, company, sector, avatar, level, current_experience, challenges_completed, current_streak, unlocked_badges, new_password, weekly_history } = req.body;
+  const { action, email, name, company, sector, avatar, level, current_experience, challenges_completed, current_streak, unlocked_badges, new_password, weekly_history, featured_badge_id } = req.body;
 
   if (!email) {
     return res.status(400).json({ error: 'User email is required' });
@@ -23,7 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             challenges_completed = ${challenges_completed},
             current_streak = ${current_streak},
             unlocked_badges = ${dbBadgesFormat},
-            weekly_history = ${dbHistoryFormat}
+            weekly_history = ${dbHistoryFormat},
+            featured_badge_id = ${featured_badge_id || null}
         WHERE email = ${email};
       `;
       return res.status(200).json({ success: true });

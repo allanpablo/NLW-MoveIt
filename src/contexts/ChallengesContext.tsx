@@ -45,16 +45,52 @@ export interface UserDbEntry {
   unlockedBadges: string[];
   avatar: string;
   weekly_history?: number[];
+  featured_badge_id?: string | null;
 }
 
 export const ALL_BADGES: Badge[] = [
+    // Primeiro Passo (Bronze)
     { id: 'first_step', name: 'Primeiro Passo', description: 'Completou o primeiro desafio', icon: '🌱', tier: 'bronze' },
-    { id: 'posture_3', name: 'Coluna de Aço', description: 'Ajustou a postura 3 vezes', icon: '📐', tier: 'silver' },
-    { id: 'hydration_3', name: 'Super Hidratado', description: 'Bebeu água 3 vezes durante os ciclos', icon: '💧', tier: 'silver' },
-    { id: 'mind_3', name: 'Mente Serena', description: 'Concluiu 3 exercícios de meditação/respiração', icon: '🧘', tier: 'gold' },
-    { id: 'streak_3', name: 'Foco Inabalável', description: 'Alcançou uma sequência de 3 ciclos', icon: '🔥', tier: 'gold' },
-    { id: 'level_5', name: 'Veterano', description: 'Alcançou o nível 5', icon: '🏆', tier: 'diamond' },
-    { id: 'streak_5', name: 'Mestre da Produtividade', description: 'Alcançou uma sequência de 5 ciclos', icon: '⚡', tier: 'legend' },
+
+    // Veterano (Nível)
+    { id: 'level_5', name: 'Veterano Bronze', description: 'Alcançou o nível 5', icon: '🥉', tier: 'bronze' },
+    { id: 'level_10', name: 'Veterano Prata', description: 'Alcançou o nível 10', icon: '🥈', tier: 'silver' },
+    { id: 'level_25', name: 'Veterano Ouro', description: 'Alcançou o nível 25', icon: '🥇', tier: 'gold' },
+    { id: 'level_50', name: 'Veterano Diamante', description: 'Alcançou o nível 50', icon: '💎', tier: 'diamond' },
+    { id: 'level_100', name: 'Veterano Lenda', description: 'Alcançou o nível 100', icon: '👑', tier: 'legend' },
+
+    // Inabalável (Sequência)
+    { id: 'streak_3', name: 'Inabalável Bronze', description: 'Alcançou sequência de 3 ciclos', icon: '🔥', tier: 'bronze' },
+    { id: 'streak_5', name: 'Inabalável Prata', description: 'Alcançou sequência de 5 ciclos', icon: '⚡', tier: 'silver' },
+    { id: 'streak_10', name: 'Inabalável Ouro', description: 'Alcançou sequência de 10 ciclos', icon: '💫', tier: 'gold' },
+    { id: 'streak_20', name: 'Inabalável Diamante', description: 'Alcançou sequência de 20 ciclos', icon: '🔮', tier: 'diamond' },
+    { id: 'streak_50', name: 'Inabalável Lenda', description: 'Alcançou sequência de 50 ciclos', icon: '🌌', tier: 'legend' },
+
+    // Hidratado
+    { id: 'hydration_3', name: 'Hidratado Bronze', description: 'Bebeu água 3 vezes', icon: '💧', tier: 'bronze' },
+    { id: 'hydration_10', name: 'Hidratado Prata', description: 'Bebeu água 10 vezes', icon: '🥤', tier: 'silver' },
+    { id: 'hydration_30', name: 'Hidratado Ouro', description: 'Bebeu água 30 vezes', icon: '🌊', tier: 'gold' },
+    { id: 'hydration_100', name: 'Hidratado Diamante', description: 'Bebeu água 100 vezes', icon: '🏄', tier: 'diamond' },
+    { id: 'hydration_300', name: 'Hidratado Lenda', description: 'Bebeu água 300 vezes', icon: '🐳', tier: 'legend' },
+
+    // Coluna de Aço
+    { id: 'posture_3', name: 'Coluna de Bronze', description: 'Ajustou a postura 3 vezes', icon: '📐', tier: 'bronze' },
+    { id: 'posture_10', name: 'Coluna de Prata', description: 'Ajustou a postura 10 vezes', icon: '🤸', tier: 'silver' },
+    { id: 'posture_30', name: 'Coluna de Ouro', description: 'Ajustou a postura 30 vezes', icon: '🧘', tier: 'gold' },
+    { id: 'posture_100', name: 'Coluna de Diamante', description: 'Ajustou a postura 100 vezes', icon: '🛡️', tier: 'diamond' },
+    { id: 'posture_300', name: 'Coluna Lendária', description: 'Ajustou a postura 300 vezes', icon: '🏯', tier: 'legend' },
+
+    // Mente Serena
+    { id: 'mind_3', name: 'Mental Bronze', description: 'Concluiu 3 relaxamentos', icon: '🧠', tier: 'bronze' },
+    { id: 'mind_10', name: 'Mental Prata', description: 'Concluiu 10 relaxamentos', icon: '🍃', tier: 'silver' },
+    { id: 'mind_30', name: 'Mental Ouro', description: 'Concluiu 30 relaxamentos', icon: '🌸', tier: 'gold' },
+    { id: 'mind_100', name: 'Mental Diamante', description: 'Concluiu 100 relaxamentos', icon: '☀️', tier: 'diamond' },
+    { id: 'mind_300', name: 'Mental Lendário', description: 'Concluiu 300 relaxamentos', icon: '🌌', tier: 'legend' },
+
+    // Medalhas Exclusivas
+    { id: 'forja_pioneiro', name: 'Pioneiro Forjador', description: 'Membro exclusivo da equipe ForjaJS', icon: '🛠️', tier: 'legend' },
+    { id: 'coruja_noite', name: 'Coruja da Noite', description: 'Completou um desafio após às 22:00', icon: '🦉', tier: 'gold' },
+    { id: 'dia_impecavel', name: 'Dia Impecável', description: 'Completou 8 ciclos em um único dia', icon: '☀️', tier: 'diamond' },
 ];
 
 interface ChallengesContextData {
@@ -93,6 +129,8 @@ interface ChallengesContextData {
     openSquadModal: () => void;
     closeSquadModal: () => void;
     weeklyHistory: number[];
+    featuredBadgeId: string | null;
+    selectFeaturedBadge: (badgeId: string) => void;
 }
 
 interface ChallengesProviderProps {
@@ -109,6 +147,7 @@ interface ChallengesProviderProps {
   userEmail?: string;
   isLoggedIn?: boolean;
   weeklyHistory?: string;
+  featuredBadgeId?: string | null;
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
@@ -139,6 +178,14 @@ export function ChallengesProvider({
       return [0,0,0,0,0,0,0];
     }
   });
+
+  const [featuredBadgeId, setFeaturedBadgeId] = useState<string | null>((rest as any).featuredBadgeId ?? null);
+
+  function selectFeaturedBadge(badgeId: string) {
+    if (unlockedBadges.includes(badgeId)) {
+      setFeaturedBadgeId(badgeId);
+    }
+  }
 
   async function loadDbUsers() {
     try {
@@ -283,7 +330,7 @@ export function ChallengesProvider({
     if (isLoggedIn && userEmail) {
       updateUserInDb();
     }
-  }, [level, currentExperience, challengesCompleted, currentStreak, unlockedBadges]);
+  }, [level, currentExperience, challengesCompleted, currentStreak, unlockedBadges, featuredBadgeId]);
 
   useEffect(() => {
     Cookies.set('level', String(level));
@@ -292,6 +339,7 @@ export function ChallengesProvider({
     Cookies.set('currentStreak', String(currentStreak));
     Cookies.set('unlockedBadges', JSON.stringify(unlockedBadges));
     Cookies.set('weeklyHistory', JSON.stringify(weeklyHistory));
+    Cookies.set('featuredBadgeId', featuredBadgeId || "");
     
     Cookies.set('userName', userName);
     Cookies.set('userAvatar', userAvatar);
@@ -299,7 +347,7 @@ export function ChallengesProvider({
     Cookies.set('userCompany', userCompany);
     Cookies.set('userEmail', userEmail);
     Cookies.set('isLoggedIn', String(isLoggedIn));
-  }, [level, currentExperience, challengesCompleted, currentStreak, unlockedBadges, weeklyHistory, userName, userAvatar, userSector, userCompany, userEmail, isLoggedIn]);
+  }, [level, currentExperience, challengesCompleted, currentStreak, unlockedBadges, weeklyHistory, featuredBadgeId, userName, userAvatar, userSector, userCompany, userEmail, isLoggedIn]);
 
   function getUsersDatabase(): UserDbEntry[] {
     if (dbUsers && dbUsers.length > 0) return dbUsers;
@@ -344,7 +392,8 @@ export function ChallengesProvider({
         name: userName,
         company: userCompany,
         sector: userSector,
-        weekly_history: weeklyHistory
+        weekly_history: weeklyHistory,
+        featured_badge_id: featuredBadgeId
       };
       saveUsersDatabase(db);
     }
@@ -361,7 +410,8 @@ export function ChallengesProvider({
         challenges_completed: challengesCompleted,
         current_streak: currentStreak,
         unlocked_badges: unlockedBadges,
-        weekly_history: weeklyHistory
+        weekly_history: weeklyHistory,
+        featured_badge_id: featuredBadgeId
       })
     }).then(() => loadDbUsers()).catch(() => {});
   }
@@ -406,7 +456,8 @@ export function ChallengesProvider({
       currentStreak: 0,
       unlockedBadges: [],
       avatar: finalAvatar,
-      weekly_history: [0,0,0,0,0,0,0]
+      weekly_history: [0,0,0,0,0,0,0],
+      featured_badge_id: null
     };
 
     db.push(newUser);
@@ -440,6 +491,7 @@ export function ChallengesProvider({
       setChallengesCompleted(user.challengesCompleted);
       setCurrentStreak(user.currentStreak);
       setUnlockedBadges(user.unlockedBadges || []);
+      setFeaturedBadgeId(user.featured_badge_id || null);
       setIsLoggedIn(true);
 
       // Try syncing credentials from database
@@ -464,6 +516,9 @@ export function ChallengesProvider({
             if (u.weekly_history) {
               setWeeklyHistory(u.weekly_history);
             }
+            if (u.featured_badge_id) {
+              setFeaturedBadgeId(u.featured_badge_id);
+            }
           }
         }
       }).catch(() => {});
@@ -486,16 +541,20 @@ export function ChallengesProvider({
     setCurrentStreak(0);
     setUnlockedBadges([]);
     setWeeklyHistory([0,0,0,0,0,0,0]);
+    setFeaturedBadgeId(null);
     setActiveChallenge(null);
   }
 
   function levelUp() {
-    setLevel(level + 1);
+    const nextLevel = level + 1;
+    setLevel(nextLevel);
     setIsLevelUpModalOpen(true);
     
-    if (level + 1 >= 5 && !unlockedBadges.includes('level_5')) {
-      unlockBadge('level_5');
-    }
+    if (nextLevel >= 5 && !unlockedBadges.includes('level_5')) unlockBadge('level_5');
+    if (nextLevel >= 10 && !unlockedBadges.includes('level_10')) unlockBadge('level_10');
+    if (nextLevel >= 25 && !unlockedBadges.includes('level_25')) unlockBadge('level_25');
+    if (nextLevel >= 50 && !unlockedBadges.includes('level_50')) unlockBadge('level_50');
+    if (nextLevel >= 100 && !unlockedBadges.includes('level_100')) unlockBadge('level_100');
   }
 
   function closeLevelUpModal(){
@@ -571,26 +630,85 @@ export function ChallengesProvider({
     const newStreak = currentStreak + 1;
     setCurrentStreak(newStreak);
 
+    // Track detailed type completions
+    let newHydration = Number(localStorage.getItem("workrats:hydrationCount") || "0");
+    let newPosture = Number(localStorage.getItem("workrats:postureCount") || "0");
+    let newMind = Number(localStorage.getItem("workrats:mindCount") || "0");
+
+    if (type === 'hydration') {
+      newHydration += 1;
+      localStorage.setItem("workrats:hydrationCount", String(newHydration));
+    } else if (type === 'posture') {
+      newPosture += 1;
+      localStorage.setItem("workrats:postureCount", String(newPosture));
+    } else if (type === 'mind') {
+      newMind += 1;
+      localStorage.setItem("workrats:mindCount", String(newMind));
+    }
+
     const nextUnlocked = [...unlockedBadges];
     
-    if (newCompletedCount >= 1 && !nextUnlocked.includes('first_step')) {
-      nextUnlocked.push('first_step');
+    const checkBadge = (id: string) => {
+      if (!nextUnlocked.includes(id)) {
+        nextUnlocked.push(id);
+        
+        if (Notification.permission === 'granted') {
+          const badge = ALL_BADGES.find(b => b.id === id);
+          if (badge) {
+            new Notification('Medalha Desbloqueada! 🎖️', {
+              body: `${badge.icon} ${badge.name}: ${badge.description}`,
+              icon: '/icons/level-up.svg'
+            });
+          }
+        }
+      }
+    };
+
+    // First Step
+    if (newCompletedCount >= 1) checkBadge('first_step');
+
+    // Streaks
+    if (newStreak >= 3) checkBadge('streak_3');
+    if (newStreak >= 5) checkBadge('streak_5');
+    if (newStreak >= 10) checkBadge('streak_10');
+    if (newStreak >= 20) checkBadge('streak_20');
+    if (newStreak >= 50) checkBadge('streak_50');
+
+    // Hydration
+    if (newHydration >= 3) checkBadge('hydration_3');
+    if (newHydration >= 10) checkBadge('hydration_10');
+    if (newHydration >= 30) checkBadge('hydration_30');
+    if (newHydration >= 100) checkBadge('hydration_100');
+    if (newHydration >= 300) checkBadge('hydration_300');
+
+    // Posture
+    if (newPosture >= 3) checkBadge('posture_3');
+    if (newPosture >= 10) checkBadge('posture_10');
+    if (newPosture >= 30) checkBadge('posture_30');
+    if (newPosture >= 100) checkBadge('posture_100');
+    if (newPosture >= 300) checkBadge('posture_300');
+
+    // Mind
+    if (newMind >= 3) checkBadge('mind_3');
+    if (newMind >= 10) checkBadge('mind_10');
+    if (newMind >= 30) checkBadge('mind_30');
+    if (newMind >= 100) checkBadge('mind_100');
+    if (newMind >= 300) checkBadge('mind_300');
+
+    // Exclusive - Coruja da Noite
+    const hour = new Date().getHours();
+    if (hour >= 22 || hour < 5) {
+      checkBadge('coruja_noite');
     }
-    if (newStreak >= 3 && !nextUnlocked.includes('streak_3')) {
-      nextUnlocked.push('streak_3');
+
+    // Exclusive - Pioneiro Forjador
+    if (userCompany && userCompany.trim().toLowerCase() === 'forjajs') {
+      checkBadge('forja_pioneiro');
     }
-    if (newStreak >= 5 && !nextUnlocked.includes('streak_5')) {
-      nextUnlocked.push('streak_5');
-    }
-    
-    if (type === 'hydration' && !nextUnlocked.includes('hydration_3')) {
-      nextUnlocked.push('hydration_3');
-    }
-    if (type === 'mind' && !nextUnlocked.includes('mind_3')) {
-      nextUnlocked.push('mind_3');
-    }
-    if (type === 'posture' && !nextUnlocked.includes('posture_3')) {
-      nextUnlocked.push('posture_3');
+
+    // Exclusive - Dia Impecável
+    if (nextHistory[dayIndex] >= 8) {
+      checkBadge('dia_impecavel');
     }
 
     setUnlockedBadges(nextUnlocked);
@@ -633,7 +751,9 @@ export function ChallengesProvider({
           isSquadModalOpen,
           openSquadModal,
           closeSquadModal,
-          weeklyHistory
+          weeklyHistory,
+          featuredBadgeId,
+          selectFeaturedBadge
         }}
     >
       {children}

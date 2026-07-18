@@ -155,6 +155,14 @@ body.dark .rankItem {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--title);
+  display: flex;
+  align-items: center;
+}
+
+.badgeNameTag {
+  margin-left: 0.4rem;
+  font-size: 0.95rem;
+  cursor: help;
 }
 
 .itemMeta {

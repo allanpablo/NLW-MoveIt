@@ -79,6 +79,34 @@
     transition: var(--transition-smooth);
 }
 
+.subtitleCabinet {
+    font-size: 0.72rem;
+    color: var(--text);
+    margin-top: -0.5rem;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.clickableBadge {
+    cursor: pointer !important;
+}
+
+.selectedFeatured {
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+    transform: translateY(-2px);
+    background: rgba(245, 158, 11, 0.05) !important;
+}
+
+.featuredBadgeStat {
+    border-left: 3px solid #f59e0b !important;
+}
+
+.featuredBadgeIcon {
+    font-size: 1.8rem;
+    margin-right: 0.75rem;
+}
+
 .badgesContainer h3 {
     font-size: 1.1rem;
     font-weight: 600;

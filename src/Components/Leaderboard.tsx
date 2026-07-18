@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { ChallengesContext, SECTORS, UserDbEntry } from "../contexts/ChallengesContext";
+import { ChallengesContext, SECTORS, UserDbEntry, ALL_BADGES } from "../contexts/ChallengesContext";
 import styles from "../styles/components/Leaderboard.module.css";
 
 type TabOption = "global" | "sectors" | "users";
@@ -13,7 +13,8 @@ export function Leaderboard() {
     userName, 
     userAvatar, 
     userEmail,
-    getUsersDatabase 
+    getUsersDatabase,
+    featuredBadgeId
   } = useContext(ChallengesContext);
 
   const [activeTab, setActiveTab] = useState<TabOption>("users");
@@ -43,7 +44,8 @@ export function Leaderboard() {
     challengesCompleted: 0,
     currentStreak: 0,
     unlockedBadges: [],
-    avatar: userAvatar
+    avatar: userAvatar,
+    featured_badge_id: featuredBadgeId
   };
 
   const allUsersMap = new Map<string, UserDbEntry>();
@@ -113,7 +115,8 @@ export function Leaderboard() {
       avatar: u.avatar,
       level: u.level,
       xp: getTotalXp(u.level, u.currentExperience),
-      isCurrentUser: u.email === userEmail
+      isCurrentUser: u.email === userEmail,
+      featuredBadgeId: u.featured_badge_id
     }))
     .sort((a, b) => b.xp - a.xp);
 
@@ -157,7 +160,14 @@ export function Leaderboard() {
                   <span className={styles.position}>{index + 1}º</span>
                   <img src={usr.avatar} alt={usr.name} className={styles.avatar} />
                   <div className={styles.itemInfo}>
-                    <span className={styles.itemName}>{usr.name} {usr.isCurrentUser && "(Você)"}</span>
+                    <span className={styles.itemName}>
+                      {usr.name} {usr.isCurrentUser && "(Você)"}
+                      {usr.featuredBadgeId && (
+                        <span className={styles.badgeNameTag} title={ALL_BADGES.find(b => b.id === usr.featuredBadgeId)?.name}>
+                          {ALL_BADGES.find(b => b.id === usr.featuredBadgeId)?.icon}
+                        </span>
+                      )}
+                    </span>
                     <span className={styles.itemMeta}>Lvl {usr.level}</span>
                   </div>
                   <span className={styles.itemValue}>{usr.xp} XP</span>
