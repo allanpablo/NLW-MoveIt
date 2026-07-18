@@ -2,14 +2,20 @@ import { useContext } from 'react';
 import { ChallengesContext } from '../contexts/ChallengesContext';
 import { CountdownContext } from '../contexts/CountdownContext';
 import styles from '../styles/components/ChallengeBox.module.css';
+import confetti from 'canvas-confetti';
 
 export function ChallengeBox() {
     const { activeChallenge, resetChallenge, completeChallenge }  = useContext(ChallengesContext);
-    const {resetCountdown} = useContext(CountdownContext);
+    const { startBreak, resetCountdown } = useContext(CountdownContext);
 
     function handleChallengeSucceded(){
         completeChallenge();
-        resetCountdown();
+        startBreak();
+        confetti({
+            particleCount: 120,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
     }
     function handleChallengeFailed(){
         resetChallenge();

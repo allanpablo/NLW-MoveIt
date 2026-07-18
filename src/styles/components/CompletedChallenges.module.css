@@ -2,16 +2,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 3.5rem 0;
-    padding-bottom: 1rem ;
-    border-bottom: 1px solid #d7d8da;
+    margin: 1.5rem 0;
+    padding: 1rem 1.2rem;
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--gray-line);
+    box-shadow: 0 4px 30px var(--shadow);
     font-weight: 500;
+    transition: var(--transition-smooth);
+    color: var(--text);
 }
 
 .completedChallengesContainer span:first-child{
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .completedChallengesContainer span:last-child{
   font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--title);
+  transition: var(--transition-smooth);
 }

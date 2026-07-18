@@ -51,12 +51,77 @@
   },
   {
     "type": "eye",
-    "description": "Usando os polegares, massage a área abaixo das sobrancelhas em movimentos circulares por 15 segundos.",
+    "description": "Usando os polegares, massageie a área abaixo das sobrancelhas em movimentos circulares por 15 segundos.",
     "amount": 70
   },
   {
     "type": "body",
     "description": "Em pé, gire a cintura o máximo que puder para a esquerda, segure por cinco segundos. Repita para a direita.",
     "amount": 90
+  },
+  {
+    "type": "hydration",
+    "description": "Beba um copo de água (250ml) para manter seu cérebro hidratado e sua mente focada.",
+    "amount": 50
+  },
+  {
+    "type": "hydration",
+    "description": "Levante-se, vá até a cozinha ou filtro e beba um copo de água. Caminhar ajuda a ativar a circulação!",
+    "amount": 60
+  },
+  {
+    "type": "mind",
+    "description": "Inspire profundamente pelo nariz por 4 segundos, segure o ar por 4 segundos e expire lentamente pela boca por 4 segundos. Repita 3 vezes.",
+    "amount": 80
+  },
+  {
+    "type": "mind",
+    "description": "Feche os olhos e mentalize 3 coisas pelas quais você é grato hoje. Sinta a gratidão por 30 segundos.",
+    "amount": 70
+  },
+  {
+    "type": "posture",
+    "description": "Alinhe as costas contra o encosto da cadeira, posicione os pés firmemente no chão e relaxe os ombros por 1 minuto.",
+    "amount": 60
+  },
+  {
+    "type": "posture",
+    "description": "Fique em pé de costas para a parede e encoste calcanhares, glúteos, ombros e cabeça na parede por 30 segundos.",
+    "amount": 80
+  },
+  {
+    "type": "body",
+    "description": "Fique em pé e faça 10 polichinelos rápidos para acelerar os batimentos cardíacos e aumentar o foco.",
+    "amount": 100
+  },
+  {
+    "type": "body",
+    "description": "Fique nas pontas dos pés e desça lentamente. Repita o movimento por 15 vezes para alongar as panturrilhas.",
+    "amount": 60
+  },
+  {
+    "type": "eye",
+    "description": "Olhe para o ponto mais distante do cômodo por 20 segundos para relaxar o músculo ocular focado na tela.",
+    "amount": 50
+  },
+  {
+    "type": "mind",
+    "description": "Feche as abas desnecessárias do navegador e limpe sua mesa de trabalho por 1 minuto para reduzir a carga cognitiva.",
+    "amount": 80
+  },
+  {
+    "type": "posture",
+    "description": "Faça movimentos circulares com os ombros para trás por 10 vezes e depois para frente por 10 vezes para aliviar a tensão cervical.",
+    "amount": 70
+  },
+  {
+    "type": "hydration",
+    "description": "Prepare um chá rápido ou pegue água saborizada com limão/hortelã. Mantenha as células ativas!",
+    "amount": 70
+  },
+  {
+    "type": "mind",
+    "description": "Desconecte-se de todas as telas por 2 minutos completos. Apenas ouça os sons ao seu redor e descanse a mente.",
+    "amount": 100
   }
 ]

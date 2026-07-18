@@ -5,22 +5,23 @@ import styles from '../styles/components/Countdown.module.css';
 
 
 export function Countdown(){
-
   const {
     minutes,
     seconds,
     hasFinished,
     isActive,
+    isBreakActive,
     startCountdown,
-    resetCountdown 
-    } = useContext(CountdownContext)
+    resetCountdown,
+    skipBreak
+  } = useContext(CountdownContext)
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2,'0').split('');
   const [secondLeft, secondRight] = String(seconds).padStart(2,'0').split('');
 
   return (
     <div>
-      <div className={styles.countdownContainer}>  
+      <div className={`${styles.countdownContainer} ${isBreakActive ? styles.countdownBreak : ''}`}>  
         <div>
           <span>{minuteLeft}</span>
           <span>{minuteRight}</span>
@@ -31,39 +32,46 @@ export function Countdown(){
           <span>{secondRight}</span>
         </div>
       </div>
-        { hasFinished ? (
-                    <button
-                      disabled
-                      type="button" 
-                      className={`${styles.countdownButton}`}
-                      >
-                        Ciclo Encerrado
-                        <img src="icons/check.svg" alt="check"/>
-                    </button>
-        ) : (
-          <>
-            {isActive ? (
-              <button 
-                type="button" 
-                className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
-                onClick={resetCountdown}
-                >
-                  Abandonar o ciclo
-                  <img src="icons/stop.svg" alt="check"/>
-              </button>
-            ) : (
+      {isBreakActive ? (
+        <button 
+          type="button" 
+          className={`${styles.countdownButton} ${styles.countdownBreakButton}`}
+          onClick={skipBreak}
+        >
+          Pular Pausa Ativa 🧘
+        </button>
+      ) : hasFinished ? (
+        <button
+          disabled
+          type="button" 
+          className={`${styles.countdownButton}`}
+        >
+          Ciclo Encerrado
+          <img src="icons/check.svg" alt="check"/>
+        </button>
+      ) : (
+        <>
+          {isActive ? (
             <button 
               type="button" 
-              className={`${styles.countdownButton} ${styles.countdownButton}`}
+              className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
+              onClick={resetCountdown}
+            >
+              Abandonar o ciclo
+              <img src="icons/stop.svg" alt="check"/>
+            </button>
+          ) : (
+            <button 
+              type="button" 
+              className={`${styles.countdownButton}`}
               onClick={startCountdown}
             >
               Iniciar um ciclo
               <img src="icons/play.svg" alt="check"/>
             </button>
-            )}
-          </>
-        )
-      }
+          )}
+        </>
+      )}
     </div>
   );
 }
