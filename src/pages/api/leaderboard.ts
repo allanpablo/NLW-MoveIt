@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const result = await sql`
-      SELECT email, name, company, sector, level, current_experience, challenges_completed, current_streak, unlocked_badges, avatar 
+      SELECT email, name, company, sector, level, current_experience, challenges_completed, current_streak, unlocked_badges, avatar, weekly_history 
       FROM users;
     `;
     return res.status(200).json(result.rows);

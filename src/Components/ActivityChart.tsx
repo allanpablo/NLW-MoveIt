@@ -3,18 +3,15 @@ import { ChallengesContext } from "../contexts/ChallengesContext";
 import styles from "../styles/components/ActivityChart.module.css";
 
 export function ActivityChart() {
-  const { challengesCompleted } = useContext(ChallengesContext);
+  const { weeklyHistory } = useContext(ChallengesContext);
+  const currentDayOfWeek = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
 
-  // Mock activity for the last 6 days, with the 7th day (today) bound to actual challengesCompleted
-  const weekDays = [
-    { label: "S", count: 3 },
-    { label: "T", count: 5 },
-    { label: "Q", count: 2 },
-    { label: "Q", count: 4 },
-    { label: "S", count: 6 },
-    { label: "S", count: 1 },
-    { label: "D", count: challengesCompleted, isToday: true }
-  ];
+  const labels = ["S", "T", "Q", "Q", "S", "S", "D"];
+  const weekDays = labels.map((label, idx) => ({
+    label,
+    count: weeklyHistory[idx] || 0,
+    isToday: idx === currentDayOfWeek
+  }));
 
   // Find max count to scale the bars proportionally (minimum height is 15% for visual style)
   const maxCount = Math.max(...weekDays.map(d => d.count), 1);

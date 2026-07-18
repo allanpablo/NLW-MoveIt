@@ -44,6 +44,7 @@ export interface UserDbEntry {
   currentStreak: number;
   unlockedBadges: string[];
   avatar: string;
+  weekly_history?: number[];
 }
 
 export const ALL_BADGES: Badge[] = [
@@ -91,6 +92,7 @@ interface ChallengesContextData {
     isSquadModalOpen: boolean;
     openSquadModal: () => void;
     closeSquadModal: () => void;
+    weeklyHistory: number[];
 }
 
 interface ChallengesProviderProps {
@@ -106,6 +108,7 @@ interface ChallengesProviderProps {
   userCompany?: string;
   userEmail?: string;
   isLoggedIn?: boolean;
+  weeklyHistory?: string;
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
@@ -128,6 +131,14 @@ export function ChallengesProvider({
   
   const [isMuted, setIsMuted] = useState(false);
   const [dbUsers, setDbUsers] = useState<UserDbEntry[]>([]);
+  
+  const [weeklyHistory, setWeeklyHistory] = useState<number[]>(() => {
+    try {
+      return (rest as any).weeklyHistory ? JSON.parse((rest as any).weeklyHistory) : [0,0,0,0,0,0,0];
+    } catch {
+      return [0,0,0,0,0,0,0];
+    }
+  });
 
   async function loadDbUsers() {
     try {
@@ -280,6 +291,7 @@ export function ChallengesProvider({
     Cookies.set('challengesCompleted', String(challengesCompleted));
     Cookies.set('currentStreak', String(currentStreak));
     Cookies.set('unlockedBadges', JSON.stringify(unlockedBadges));
+    Cookies.set('weeklyHistory', JSON.stringify(weeklyHistory));
     
     Cookies.set('userName', userName);
     Cookies.set('userAvatar', userAvatar);
@@ -287,7 +299,7 @@ export function ChallengesProvider({
     Cookies.set('userCompany', userCompany);
     Cookies.set('userEmail', userEmail);
     Cookies.set('isLoggedIn', String(isLoggedIn));
-  }, [level, currentExperience, challengesCompleted, currentStreak, unlockedBadges, userName, userAvatar, userSector, userCompany, userEmail, isLoggedIn]);
+  }, [level, currentExperience, challengesCompleted, currentStreak, unlockedBadges, weeklyHistory, userName, userAvatar, userSector, userCompany, userEmail, isLoggedIn]);
 
   function getUsersDatabase(): UserDbEntry[] {
     if (dbUsers && dbUsers.length > 0) return dbUsers;
@@ -331,7 +343,8 @@ export function ChallengesProvider({
         avatar: userAvatar,
         name: userName,
         company: userCompany,
-        sector: userSector
+        sector: userSector,
+        weekly_history: weeklyHistory
       };
       saveUsersDatabase(db);
     }
@@ -347,7 +360,8 @@ export function ChallengesProvider({
         current_experience: currentExperience,
         challenges_completed: challengesCompleted,
         current_streak: currentStreak,
-        unlocked_badges: unlockedBadges
+        unlocked_badges: unlockedBadges,
+        weekly_history: weeklyHistory
       })
     }).then(() => loadDbUsers()).catch(() => {});
   }
@@ -391,7 +405,8 @@ export function ChallengesProvider({
       challengesCompleted: 0,
       currentStreak: 0,
       unlockedBadges: [],
-      avatar: finalAvatar
+      avatar: finalAvatar,
+      weekly_history: [0,0,0,0,0,0,0]
     };
 
     db.push(newUser);
@@ -446,6 +461,9 @@ export function ChallengesProvider({
             setChallengesCompleted(u.challenges_completed);
             setCurrentStreak(u.current_streak);
             setUnlockedBadges(u.unlocked_badges || []);
+            if (u.weekly_history) {
+              setWeeklyHistory(u.weekly_history);
+            }
           }
         }
       }).catch(() => {});
@@ -467,6 +485,7 @@ export function ChallengesProvider({
     setChallengesCompleted(0);
     setCurrentStreak(0);
     setUnlockedBadges([]);
+    setWeeklyHistory([0,0,0,0,0,0,0]);
     setActiveChallenge(null);
   }
 
@@ -544,6 +563,11 @@ export function ChallengesProvider({
     const newCompletedCount = challengesCompleted + 1;
     setChallengesCompleted(newCompletedCount);
     
+    const dayIndex = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
+    const nextHistory = [...weeklyHistory];
+    nextHistory[dayIndex] = (nextHistory[dayIndex] || 0) + 1;
+    setWeeklyHistory(nextHistory);
+    
     const newStreak = currentStreak + 1;
     setCurrentStreak(newStreak);
 
@@ -608,7 +632,8 @@ export function ChallengesProvider({
           updateProfile,
           isSquadModalOpen,
           openSquadModal,
-          closeSquadModal
+          closeSquadModal,
+          weeklyHistory
         }}
     >
       {children}

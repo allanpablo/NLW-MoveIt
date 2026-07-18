@@ -15,8 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         challenges_completed INTEGER DEFAULT 0,
         current_streak INTEGER DEFAULT 0,
         unlocked_badges TEXT[] DEFAULT '{}',
-        avatar TEXT
+        avatar TEXT,
+        weekly_history INTEGER[] DEFAULT '{0,0,0,0,0,0,0}'
       );
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS weekly_history INTEGER[] DEFAULT '{0,0,0,0,0,0,0}';
     `;
     return res.status(200).json({ message: "Table users verified/created successfully! 🚀" });
   } catch (error: any) {
