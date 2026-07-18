@@ -131,6 +131,9 @@ interface ChallengesContextData {
     weeklyHistory: number[];
     featuredBadgeId: string | null;
     selectFeaturedBadge: (badgeId: string) => void;
+    isArenaModalOpen: boolean;
+    openArenaModal: () => void;
+    closeArenaModal: () => void;
 }
 
 interface ChallengesProviderProps {
@@ -223,6 +226,7 @@ export function ChallengesProvider({
   const [breakTaskCompleted, setBreakTaskCompleted] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isSquadModalOpen, setIsSquadModalOpen] = useState(false);
+  const [isArenaModalOpen, setIsArenaModalOpen] = useState(false);
 
   function openSettingsModal() {
     setIsSettingsModalOpen(true);
@@ -238,6 +242,14 @@ export function ChallengesProvider({
 
   function closeSquadModal() {
     setIsSquadModalOpen(false);
+  }
+
+  function openArenaModal() {
+    setIsArenaModalOpen(true);
+  }
+
+  function closeArenaModal() {
+    setIsArenaModalOpen(false);
   }
 
   function updatePassword(newPass: string) {
@@ -753,7 +765,10 @@ export function ChallengesProvider({
           closeSquadModal,
           weeklyHistory,
           featuredBadgeId,
-          selectFeaturedBadge
+          selectFeaturedBadge,
+          isArenaModalOpen,
+          openArenaModal,
+          closeArenaModal
         }}
     >
       {children}

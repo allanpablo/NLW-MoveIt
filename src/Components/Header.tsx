@@ -3,7 +3,7 @@ import { ChallengesContext, ALL_BADGES } from "../contexts/ChallengesContext";
 import styles from "../styles/components/Header.module.css";
 
 export function Header() {
-  const { userName, userAvatar, userCompany, userSector, logout, isMuted, toggleMute, openSettingsModal, openSquadModal, featuredBadgeId } = useContext(ChallengesContext);
+  const { userName, userAvatar, userCompany, userSector, logout, isMuted, toggleMute, openSettingsModal, openSquadModal, openArenaModal, featuredBadgeId } = useContext(ChallengesContext);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -77,6 +77,15 @@ export function Header() {
           title="Membros do Squad"
         >
           👥
+        </button>
+
+        <button 
+          type="button" 
+          onClick={openArenaModal} 
+          className={styles.themeToggleBtn}
+          title="Arena & Ranking"
+        >
+          🏆
         </button>
 
         <div className={styles.userDropdown}>

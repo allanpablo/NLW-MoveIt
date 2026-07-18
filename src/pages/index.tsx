@@ -14,6 +14,7 @@ import { Leaderboard } from "../Components/Leaderboard";
 import { Header } from "../Components/Header";
 import { SettingsModal } from "../Components/SettingsModal";
 import { SquadModal } from "../Components/SquadModal";
+import { ArenaModal } from "../Components/ArenaModal";
 import { ActivityChart } from "../Components/ActivityChart";
 
 interface HomeProps {
@@ -31,7 +32,7 @@ interface HomeProps {
 }
 
 function HomeContent() {
-  const { isLoggedIn, isSettingsModalOpen, isSquadModalOpen } = useContext(ChallengesContext);
+  const { isLoggedIn, isSettingsModalOpen, isSquadModalOpen, isArenaModalOpen } = useContext(ChallengesContext);
 
   if (!isLoggedIn) {
     return <Login />;
@@ -49,7 +50,6 @@ function HomeContent() {
           <div className={styles.leftColumn}>
             <Profile />
             <CompletedChallenges />
-            <ActivityChart />
           </div>
           
           <div className={styles.centerColumn}>
@@ -57,7 +57,6 @@ function HomeContent() {
           </div>
           
           <div className={styles.rightColumn}>
-            <Leaderboard />
             <Countdown />
           </div>
         </main>
@@ -65,6 +64,7 @@ function HomeContent() {
 
       {isSettingsModalOpen && <SettingsModal />}
       {isSquadModalOpen && <SquadModal />}
+      {isArenaModalOpen && <ArenaModal />}
     </div>
   );
 }

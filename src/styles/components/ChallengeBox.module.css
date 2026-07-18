@@ -131,3 +131,43 @@
 .challengeActive footer button.challengeSuccededButton:hover {
     box-shadow: 0 6px 20px rgba(52, 211, 153, 0.35);
 }
+
+.staticIcon {
+  max-height: 80px !important;
+  margin-bottom: 0.5rem;
+}
+
+.descText {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.guideContainer {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--gray-line);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: left;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+body.dark .guideContainer {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.guideContainer h4 {
+  font-size: 0.85rem;
+  color: var(--blue);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.guideStep {
+  font-size: 0.78rem;
+  line-height: 1.45 !important;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
