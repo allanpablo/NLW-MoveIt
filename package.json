@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@vercel/postgres": "^0.10.0",
     "canvas-confetti": "^1.9.4",
     "forjajs": "^1.1.6",
     "js-cookie": "^2.2.1",

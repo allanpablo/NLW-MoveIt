@@ -124,6 +124,23 @@ export function ChallengesProvider({
   const [isLoggedIn, setIsLoggedIn] = useState(rest.isLoggedIn ?? false);
   
   const [isMuted, setIsMuted] = useState(false);
+  const [dbUsers, setDbUsers] = useState<UserDbEntry[]>([]);
+
+  async function loadDbUsers() {
+    try {
+      const response = await fetch('/api/leaderboard');
+      if (response.ok) {
+        const data = await response.json();
+        setDbUsers(data);
+        return data;
+      }
+    } catch (e) {
+      console.warn("Postgres database offline/unconfigured. Falling back to local storage.", e);
+    }
+    const local = getUsersDatabase();
+    setDbUsers(local);
+    return local;
+  }
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -161,13 +178,43 @@ export function ChallengesProvider({
       db[idx].password = newPass;
       saveUsersDatabase(db);
     }
+
+    // API Sync
+    fetch('/api/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'change_password',
+        email: userEmail,
+        new_password: newPass
+      })
+    }).catch(() => {});
   }
 
   function updateProfile(name: string, company: string, sector: string, avatar: string) {
-    setUserName(name.trim());
-    setUserCompany(company.trim());
-    setUserSector(sector.trim());
-    setUserAvatar(avatar.trim());
+    const cleanName = name.trim();
+    const cleanCompany = company.trim();
+    const cleanSector = sector.trim();
+    const cleanAvatar = avatar.trim();
+
+    setUserName(cleanName);
+    setUserCompany(cleanCompany);
+    setUserSector(cleanSector);
+    setUserAvatar(cleanAvatar);
+
+    // API Sync
+    fetch('/api/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'update_profile',
+        email: userEmail,
+        name: cleanName,
+        company: cleanCompany,
+        sector: cleanSector,
+        avatar: cleanAvatar
+      })
+    }).then(() => loadDbUsers()).catch(() => {});
   }
 
   function completeBreakTask() {
@@ -197,9 +244,16 @@ export function ChallengesProvider({
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
   useEffect(() => {
-    Notification.requestPermission()
+    Notification.requestPermission();
     initializeMockUsers();
-  }, [])
+    loadDbUsers();
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      loadDbUsers();
+    }
+  }, [isLoggedIn]);
 
   // Sync state to local user DB on change
   useEffect(() => {
@@ -224,6 +278,7 @@ export function ChallengesProvider({
   }, [level, currentExperience, challengesCompleted, currentStreak, unlockedBadges, userName, userAvatar, userSector, userCompany, userEmail, isLoggedIn]);
 
   function getUsersDatabase(): UserDbEntry[] {
+    if (dbUsers && dbUsers.length > 0) return dbUsers;
     if (typeof window === "undefined") return [];
     const db = localStorage.getItem("workrats:users");
     return db ? JSON.parse(db) : [];
@@ -268,15 +323,50 @@ export function ChallengesProvider({
       };
       saveUsersDatabase(db);
     }
+
+    // Parallel API Sync
+    fetch('/api/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'update',
+        email: userEmail,
+        level,
+        current_experience: currentExperience,
+        challenges_completed: challengesCompleted,
+        current_streak: currentStreak,
+        unlocked_badges: unlockedBadges
+      })
+    }).then(() => loadDbUsers()).catch(() => {});
   }
 
   function signUp(name: string, email: string, password: string, company: string, sector: string, avatar: string) {
+    const cleanCompany = company.trim();
+    const cleanSector = sector.trim();
+    const finalAvatar = avatar.trim() || `https://api.dicebear.com/7.x/bottts/svg?seed=${name.trim()}`;
+
+    // API Sync
+    fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'signup',
+        name: name.trim(),
+        email: email.trim(),
+        password: password.trim(),
+        company: cleanCompany,
+        sector: cleanSector,
+        avatar: finalAvatar
+      })
+    }).then(res => {
+      if (res.ok) {
+        loadDbUsers();
+      }
+    }).catch(() => {});
+
     const db = getUsersDatabase();
     const existing = db.find(u => u.email === email);
     if (existing) return;
-
-    const cleanCompany = company.trim();
-    const cleanSector = sector.trim();
 
     const newUser: UserDbEntry = {
       email: email.trim(),
@@ -289,7 +379,7 @@ export function ChallengesProvider({
       challengesCompleted: 0,
       currentStreak: 0,
       unlockedBadges: [],
-      avatar: avatar.trim() || `https://api.dicebear.com/7.x/bottts/svg?seed=${name.trim()}`
+      avatar: finalAvatar
     };
 
     db.push(newUser);
@@ -324,6 +414,30 @@ export function ChallengesProvider({
       setCurrentStreak(user.currentStreak);
       setUnlockedBadges(user.unlockedBadges || []);
       setIsLoggedIn(true);
+
+      // Try syncing credentials from database
+      fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'signin', email, password })
+      }).then(async res => {
+        if (res.ok) {
+          const data = await res.json();
+          const u = data.user;
+          if (u) {
+            setUserName(u.name);
+            setUserAvatar(u.avatar);
+            setUserSector(u.sector);
+            setUserCompany(u.company);
+            setLevel(u.level);
+            setCurrentExperience(u.current_experience);
+            setChallengesCompleted(u.challenges_completed);
+            setCurrentStreak(u.current_streak);
+            setUnlockedBadges(u.unlocked_badges || []);
+          }
+        }
+      }).catch(() => {});
+
       return true;
     }
     return false;
