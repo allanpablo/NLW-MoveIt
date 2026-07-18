@@ -3,8 +3,26 @@ import { ChallengesContext, SECTORS } from "../contexts/ChallengesContext";
 import styles from "../styles/components/Login.module.css";
 
 export function Login() {
-  const { signUp, signIn } = useContext(ChallengesContext);
+  const { signUp, signIn, getUsersDatabase } = useContext(ChallengesContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
+  
+  const db = getUsersDatabase ? getUsersDatabase() : [];
+  const registeredCompanies = Array.from(new Set(db.map(u => u.company))).filter(Boolean);
+  
+  const defaultSectorNames = [
+    'TI & Engenharia',
+    'Vendas & Growth',
+    'Recursos Humanos',
+    'Financeiro',
+    'Marketing',
+    'Operações',
+    'Administrativo'
+  ];
+  
+  const registeredSectors = Array.from(new Set([
+    ...defaultSectorNames,
+    ...db.map(u => u.sector)
+  ])).filter(Boolean);
   
   // Input fields
   const [name, setName] = useState("");
@@ -99,26 +117,35 @@ export function Login() {
                 <input 
                   id="company"
                   type="text" 
-                  placeholder="Ex: ForjaJS" 
+                  placeholder="Selecione ou digite sua empresa" 
                   value={company} 
                   onChange={e => setCompany(e.target.value)}
+                  list="companies-list"
                   required
                 />
+                <datalist id="companies-list">
+                  {registeredCompanies.map(c => (
+                    <option key={c} value={c} />
+                  ))}
+                </datalist>
               </div>
 
               <div className={styles.inputGroup}>
                 <label htmlFor="sector">Setor / Departamento</label>
-                <select 
+                <input 
                   id="sector"
+                  type="text" 
+                  placeholder="Selecione ou digite seu setor" 
                   value={sector} 
                   onChange={e => setSector(e.target.value)}
-                >
-                  {SECTORS.map(sec => (
-                    <option key={sec.id} value={sec.id}>
-                      {sec.name} ({sec.pomodoroTime} min)
-                    </option>
+                  list="sectors-list"
+                  required
+                />
+                <datalist id="sectors-list">
+                  {registeredSectors.map(sec => (
+                    <option key={sec} value={sec} />
                   ))}
-                </select>
+                </datalist>
               </div>
 
               <div className={styles.avatarSelection}>

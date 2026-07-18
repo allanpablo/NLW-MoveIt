@@ -1,101 +1,121 @@
 [
   {
     "type": "body",
+    "title": "Alongamento de Extensores de Pulso",
     "description": "Estique um de seus braços com a palma da mão virada para frente e puxe todos os dedos para trás por 15 segundos. Troque de braço.",
     "amount": 80
   },
   {
     "type": "body",
-    "description": "Sentado, entrelace os dedos e estique os braços para cima o máximo que puder, alongando a coluna por 15 segundos.",
+    "title": "Alongamento Vertical de Coluna",
+    "description": "Sentado, entrelace os dedos e estique os braços para cima o máximo que puder, alongando toda a coluna por 15 segundos.",
     "amount": 60
   },
   {
     "type": "body",
+    "title": "Alongamento de Tríceps e Ombros",
     "description": "Estique seu braço contra o peito e puxe-o com o outro braço pressionando o cotovelo por 15 segundos. Troque o lado.",
     "amount": 60
   },
   {
     "type": "body",
+    "title": "Alongamento Cervical Lateral",
     "description": "Puxe o pescoço lateralmente com a ajuda da mão esquerda em direção ao ombro por 12 segundos. Repita no lado direito.",
     "amount": 70
   },
   {
     "type": "body",
+    "title": "Alongamento de Trapézio",
     "description": "Entrelace as mãos atrás da cabeça e leve o queixo suavemente em direção ao peito por 15 segundos, alongando a cervical.",
     "amount": 60
   },
   {
     "type": "body",
+    "title": "Alongamento de Glúteo e Piriforme",
     "description": "Sentado, cruze uma perna sobre a outra apoando o tornozelo no joelho oposto e incline o tronco para a frente por 15 segundos. Troque o lado.",
     "amount": 80
   },
   {
     "type": "body",
+    "title": "Torção de Tronco na Cadeira",
     "description": "Sentado, apoie as duas mãos na base da cadeira e faça uma rotação de tronco olhando para trás por 12 segundos. Repita para o outro lado.",
     "amount": 80
   },
   {
     "type": "body",
+    "title": "Alongamento de Quadríceps em Pé",
     "description": "Fique em pé ao lado da mesa, puxe um dos pés atrás do corpo para alongar o quadríceps por 15 segundos. Troque de perna.",
     "amount": 90
   },
   {
     "type": "body",
+    "title": "Ativação Muscular de Panturrilha",
     "description": "Fique em pé e faça elevação de panturrilhas (subindo nas pontas dos pés) por 15 repetições para ativar a circulação das pernas.",
     "amount": 70
   },
   {
     "type": "body",
+    "title": "Mobilidade de Tornozelos",
     "description": "Sentado, estique as pernas para frente paralelas ao chão e faça movimentos circulares com os tornozelos 10 vezes para cada lado.",
     "amount": 60
   },
   {
     "type": "eye",
+    "title": "Massagem de Alívio Ocular",
     "description": "Massageie as têmporas e a área abaixo das sobrancelhas fazendo movimentos circulares suaves com os polegares por 15 segundos.",
     "amount": 70
   },
   {
     "type": "eye",
+    "title": "Ginástica Ocular de Foco",
     "description": "Feche os olhos firmemente por 5 segundos e depois abra-os o máximo que puder. Repita este movimento 5 vezes.",
     "amount": 80
   },
   {
     "type": "eye",
+    "title": "Pausa 20-20-20 de Descanso Visual",
     "description": "Desvie o olhar da tela e foque em um ponto distante (a mais de 6 metros) por 20 segundos para relaxar a musculatura ocular.",
     "amount": 60
   },
   {
     "type": "posture",
+    "title": "Alinhamento e Rotação de Ombros",
     "description": "Alinhe toda a coluna contra o encosto da cadeira, apoie os dois pés planos no chão e rotacione os ombros para trás 10 vezes.",
     "amount": 70
   },
   {
     "type": "posture",
+    "title": "Abertura Torácica e Peitoral",
     "description": "Fique em pé e empurre os cotovelos para trás abrindo totalmente o peito, mantendo a posição por 15 segundos.",
     "amount": 80
   },
   {
     "type": "posture",
+    "title": "Extensão de Braços e Ombros",
     "description": "Sentado, entrelace as mãos atrás das costas (se possível na cadeira) e alongue os braços abrindo os ombros por 15 segundos.",
     "amount": 80
   },
   {
     "type": "hydration",
+    "title": "Caminhada de Hidratação",
     "description": "Fique em pé, caminhe até o filtro e beba um copo de água. A caminhada ativa a circulação e as articulações inferiores.",
     "amount": 60
   },
   {
     "type": "hydration",
+    "title": "Soltura de Membros e Hidratação",
     "description": "Vá buscar água e aproveite para dar passos rápidos, soltando os braços ao lado do corpo para aliviar a tensão geral.",
     "amount": 70
   },
   {
     "type": "mind",
+    "title": "Respiração Diafragmática Focada",
     "description": "Faça a respiração diafragmática: inspire pelo nariz expandindo o abdômen por 4s, segure por 4s e expire devagar por 6s. Faça 3 vezes.",
     "amount": 80
   },
   {
     "type": "mind",
+    "title": "Meditação de Descompressão Rápida",
     "description": "Mantenha a postura ereta na cadeira, feche os olhos e inspire profundamente soltando o ar com os ombros totalmente relaxados por 1 minuto.",
     "amount": 90
   }

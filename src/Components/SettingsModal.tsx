@@ -10,8 +10,27 @@ export function SettingsModal() {
     userAvatar, 
     closeSettingsModal, 
     updateProfile, 
-    updatePassword 
+    updatePassword,
+    getUsersDatabase
   } = useContext(ChallengesContext);
+
+  const db = getUsersDatabase ? getUsersDatabase() : [];
+  const registeredCompanies = Array.from(new Set(db.map(u => u.company))).filter(Boolean);
+  
+  const defaultSectorNames = [
+    'TI & Engenharia',
+    'Vendas & Growth',
+    'Recursos Humanos',
+    'Financeiro',
+    'Marketing',
+    'Operações',
+    'Administrativo'
+  ];
+  
+  const registeredSectors = Array.from(new Set([
+    ...defaultSectorNames,
+    ...db.map(u => u.sector)
+  ])).filter(Boolean);
 
   // Profile fields
   const [name, setName] = useState(userName);
@@ -79,23 +98,31 @@ export function SettingsModal() {
               type="text" 
               value={company} 
               onChange={e => setCompany(e.target.value)} 
+              list="modal-companies-list"
               required 
             />
+            <datalist id="modal-companies-list">
+              {registeredCompanies.map(c => (
+                <option key={c} value={c} />
+              ))}
+            </datalist>
           </div>
 
           <div className={styles.inputGroup}>
             <label htmlFor="modal-sector">Setor / Departamento</label>
-            <select 
+            <input 
               id="modal-sector" 
+              type="text" 
               value={sector} 
-              onChange={e => setSector(e.target.value)}
-            >
-              {SECTORS.map(sec => (
-                <option key={sec.id} value={sec.id}>
-                  {sec.name} ({sec.pomodoroTime} min)
-                </option>
+              onChange={e => setSector(e.target.value)} 
+              list="modal-sectors-list"
+              required 
+            />
+            <datalist id="modal-sectors-list">
+              {registeredSectors.map(sec => (
+                <option key={sec} value={sec} />
               ))}
-            </select>
+            </datalist>
           </div>
 
           <div className={styles.inputGroup}>

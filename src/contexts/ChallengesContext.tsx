@@ -5,6 +5,7 @@ import { LevelUpModal } from "../Components/LevelUpModal";
 
 interface Challenge {
     type: 'body' | 'eye' | 'hydration' | 'mind' | 'posture';
+    title?: string;
     description: string;
     amount: number;
 }
@@ -397,7 +398,11 @@ export function ChallengesProvider({
       return;
     }
     const { amount, type } = activeChallenge;
-    let finalExperience = currentExperience + amount;
+    // Calculate streak boost: +5% XP per consecutive focus cycle completed
+    const xpBoost = 1 + (currentStreak * 0.05);
+    const experienceGained = Math.round(amount * xpBoost);
+    
+    let finalExperience = currentExperience + experienceGained;
 
     if (finalExperience >= experienceToNextLevel){
       finalExperience = finalExperience - experienceToNextLevel;

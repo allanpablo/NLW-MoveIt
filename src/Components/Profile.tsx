@@ -20,7 +20,7 @@ export function Profile(){
                     <div className={styles.statItem}>
                         <span className={styles.fireIcon}>🔥</span>
                         <div>
-                            <span>Foco Ativo</span>
+                            <span>Foco Ativo (+{currentStreak * 5}% XP)</span>
                             <strong>{currentStreak} {currentStreak === 1 ? 'Ciclo' : 'Ciclos'}</strong>
                         </div>
                     </div>
