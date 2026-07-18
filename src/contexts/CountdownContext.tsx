@@ -7,6 +7,8 @@ interface CountdownContextData{
     hasFinished: boolean;
     isActive: boolean;
     isBreakActive: boolean;
+    isLongBreak: boolean;
+    completedCyclesCount: number;
     startCountdown: () => void;
     resetCountdown: () => void;
     startBreak: () => void;
@@ -27,12 +29,13 @@ export function CountdownProvider({children}: CountdownProviderProps){
     // Find sector time (default to 25 mins)
     const sectorInfo = SECTORS.find(s => s.id === userSector);
     const workTime = sectorInfo ? sectorInfo.pomodoroTime * 60 : 25 * 60;
-    const breakTime = 5 * 60; // 5 minutes break
     
     const [time, setTime] = useState(workTime);
     const [isActive, setIsActive] = useState(false);
     const [hasFinished, setHasFinished] = useState(false);
     const [isBreakActive, setIsBreakActive] = useState(false);
+    const [isLongBreak, setIsLongBreak] = useState(false);
+    const [completedCyclesCount, setCompletedCyclesCount] = useState(0);
   
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -53,6 +56,7 @@ export function CountdownProvider({children}: CountdownProviderProps){
         setIsActive(false);
         setHasFinished(false);
         setIsBreakActive(false);
+        setIsLongBreak(false);
         setTime(workTime);
     } 
 
@@ -61,7 +65,18 @@ export function CountdownProvider({children}: CountdownProviderProps){
         setIsActive(true);
         setHasFinished(false);
         setIsBreakActive(true);
-        setTime(breakTime);
+        
+        const nextCyclesCount = completedCyclesCount + 1;
+        setCompletedCyclesCount(nextCyclesCount);
+        
+        // Every 4 cycles, take a long rest (15 minutes)
+        if (nextCyclesCount > 0 && nextCyclesCount % 4 === 0) {
+            setIsLongBreak(true);
+            setTime(15 * 60);
+        } else {
+            setIsLongBreak(false);
+            setTime(5 * 60);
+        }
     }
 
     function skipBreak() {
@@ -100,6 +115,8 @@ export function CountdownProvider({children}: CountdownProviderProps){
             hasFinished,
             isActive,
             isBreakActive,
+            isLongBreak,
+            completedCyclesCount,
             startCountdown,
             resetCountdown,
             startBreak,

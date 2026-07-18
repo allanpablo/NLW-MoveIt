@@ -166,3 +166,42 @@
     color: #fff !important;
     cursor: default;
 }
+
+.cycleDotsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.dotsRow {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.cycleDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--gray-line);
+    background: rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+body.dark .cycleDot {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.completedDot {
+    background: var(--green) !important;
+    border-color: var(--green) !important;
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+}
+
+.cycleText {
+    font-size: 0.75rem;
+    color: var(--text);
+    font-weight: 500;
+}

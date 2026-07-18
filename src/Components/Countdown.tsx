@@ -11,6 +11,8 @@ export function Countdown(){
     hasFinished,
     isActive,
     isBreakActive,
+    isLongBreak,
+    completedCyclesCount,
     startCountdown,
     resetCountdown,
     skipBreak
@@ -56,10 +58,29 @@ export function Countdown(){
         </div>
       </div>
 
+      {!isBreakActive && (
+        <div className={styles.cycleDotsContainer}>
+          <div className={styles.dotsRow}>
+            {Array.from({ length: 4 }).map((_, idx) => {
+              const isCompleted = idx < (completedCyclesCount % 4);
+              return (
+                <span 
+                  key={idx} 
+                  className={`${styles.cycleDot} ${isCompleted ? styles.completedDot : ''}`}
+                />
+              );
+            })}
+          </div>
+          <span className={styles.cycleText}>
+            {(completedCyclesCount % 4)}/4 ciclos para a Pausa Longa 🌴
+          </span>
+        </div>
+      )}
+
       {isBreakActive && (
         <div className={styles.cooldownCard}>
-          <h4>{activeTip.title}</h4>
-          <p>{activeTip.desc}</p>
+          <h4>{isLongBreak ? "🌴 Pausa Longa Restauradora" : activeTip.title}</h4>
+          <p>{isLongBreak ? "Dica: Parabéns! Você completou 4 ciclos. Levante-se, caminhe, tome um café ou alongue-se bem." : activeTip.desc}</p>
           
           <button
             type="button"
@@ -78,7 +99,7 @@ export function Countdown(){
           className={`${styles.countdownButton} ${styles.countdownBreakButton}`}
           onClick={skipBreak}
         >
-          Pular Pausa Ativa 🧘
+          {isLongBreak ? "Pular Pausa Longa 🌴" : "Pular Pausa Ativa 🧘"}
         </button>
       ) : hasFinished ? (
         <button
@@ -98,7 +119,6 @@ export function Countdown(){
               onClick={resetCountdown}
             >
               Abandonar o ciclo
-
               <img src="icons/stop.svg" alt="check"/>
             </button>
           ) : (
