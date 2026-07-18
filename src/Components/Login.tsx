@@ -79,12 +79,12 @@ export function Login() {
     <div className={styles.loginOverlay}>
       <div className={styles.loginContainer}>
         <div className={styles.loginLogo}>
-          <img src="/icons/level-up.svg" alt="WorkRats logo" className={styles.logoIcon} />
-          <span>WorkRats</span>
+          <img src="/icons/level-up.svg" alt="OfficeFit logo" className={styles.logoIcon} />
+          <span>OfficeFit</span>
         </div>
         
         <form onSubmit={handleSubmit} className={styles.loginForm}>
-          <h2>{isLoginMode ? "Entre na sua Conta" : "Crie seu Perfil Rats"}</h2>
+          <h2>{isLoginMode ? "Entre na sua Conta" : "Crie seu Perfil"}</h2>
           <p>
             {isLoginMode 
               ? "Bem-vindo de volta! Gamifique sua rotina e compita saudavelmente." 

@@ -129,7 +129,7 @@ export function Leaderboard() {
   return (
     <div className={styles.leaderboardContainer}>
       <div className={styles.header}>
-        <h2>WorkRats Arena</h2>
+        <h2>OfficeFit Arena</h2>
         
         <div className={styles.controlsRow}>
           <select 
@@ -237,7 +237,7 @@ export function Leaderboard() {
                     <span className={styles.position}>{index + 1}º</span>
                     <div className={styles.itemInfo}>
                       <span className={styles.itemName}>{comp.name}</span>
-                      <span className={styles.itemMeta}>{comp.count} Rats cadastrados</span>
+                      <span className={styles.itemMeta}>{comp.count} membros ativos</span>
                     </div>
                     <span className={styles.itemValue}>{comp.averageXp} XP/avg</span>
                   </div>

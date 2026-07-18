@@ -35,8 +35,8 @@ export function Header() {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.logoArea}>
-        <img src="/icons/level-up.svg" alt="WorkRats logo" />
-        <span>WorkRats</span>
+        <img src="/icons/level-up.svg" alt="OfficeFit logo" />
+        <span>OfficeFit</span>
         <span className={styles.companyBadge}>
           {userCompany} • {sectorName}
         </span>

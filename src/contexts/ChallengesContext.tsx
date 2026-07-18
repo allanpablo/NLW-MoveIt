@@ -208,7 +208,7 @@ export function ChallengesProvider({
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const savedMute = localStorage.getItem("workrats:muted");
+      const savedMute = localStorage.getItem("officefit:muted");
       if (savedMute === "true") {
         setIsMuted(true);
       }
@@ -218,7 +218,7 @@ export function ChallengesProvider({
   function toggleMute() {
     setIsMuted(prev => {
       const newVal = !prev;
-      localStorage.setItem("workrats:muted", String(newVal));
+      localStorage.setItem("officefit:muted", String(newVal));
       return newVal;
     });
   }
@@ -364,13 +364,13 @@ export function ChallengesProvider({
   function getUsersDatabase(): UserDbEntry[] {
     if (dbUsers && dbUsers.length > 0) return dbUsers;
     if (typeof window === "undefined") return [];
-    const db = localStorage.getItem("workrats:users");
+    const db = localStorage.getItem("officefit:users");
     return db ? JSON.parse(db) : [];
   }
 
   function saveUsersDatabase(db: UserDbEntry[]) {
     if (typeof window !== "undefined") {
-      localStorage.setItem("workrats:users", JSON.stringify(db));
+      localStorage.setItem("officefit:users", JSON.stringify(db));
     }
   }
 
@@ -643,19 +643,19 @@ export function ChallengesProvider({
     setCurrentStreak(newStreak);
 
     // Track detailed type completions
-    let newHydration = Number(localStorage.getItem("workrats:hydrationCount") || "0");
-    let newPosture = Number(localStorage.getItem("workrats:postureCount") || "0");
-    let newMind = Number(localStorage.getItem("workrats:mindCount") || "0");
+    let newHydration = Number(localStorage.getItem("officefit:hydrationCount") || "0");
+    let newPosture = Number(localStorage.getItem("officefit:postureCount") || "0");
+    let newMind = Number(localStorage.getItem("officefit:mindCount") || "0");
 
     if (type === 'hydration') {
       newHydration += 1;
-      localStorage.setItem("workrats:hydrationCount", String(newHydration));
+      localStorage.setItem("officefit:hydrationCount", String(newHydration));
     } else if (type === 'posture') {
       newPosture += 1;
-      localStorage.setItem("workrats:postureCount", String(newPosture));
+      localStorage.setItem("officefit:postureCount", String(newPosture));
     } else if (type === 'mind') {
       newMind += 1;
-      localStorage.setItem("workrats:mindCount", String(newMind));
+      localStorage.setItem("officefit:mindCount", String(newMind));
     }
 
     const nextUnlocked = [...unlockedBadges];
