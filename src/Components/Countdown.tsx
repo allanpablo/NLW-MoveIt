@@ -19,6 +19,18 @@ export function Countdown(){
   const [minuteLeft, minuteRight] = String(minutes).padStart(2,'0').split('');
   const [secondLeft, secondRight] = String(seconds).padStart(2,'0').split('');
 
+  // Break cooldown tips
+  const breakTips = [
+    { title: "💧 Hidratação Contínua", desc: "Dica: Dê pequenos goles de água agora. Manter o cérebro hidratado evita dores de cabeça e fadiga mental." },
+    { title: "🧘 Respiração Consciente", desc: "Dica: Respire fundo pelo nariz por 4s, segure por 4s e solte pela boca por 6s. Sinta a tensão sair dos ombros." },
+    { title: "📐 Ajuste de Postura", desc: "Dica: Gire os ombros para trás 5 vezes. Mantenha os pés totalmente apoiados no chão e a coluna ereta." },
+    { title: "👁️ Descanso Visual", desc: "Dica: Foque o olhar no ponto mais distante da sala ou olhe pela janela para relaxar o músculo dos olhos." },
+    { title: "⚡ Circulação Ativa", desc: "Dica: Fique de pé e sacuda as pernas por alguns segundos. Isso ativa o retorno venoso e traz mais oxigênio ao cérebro." }
+  ];
+
+  // Pick a tip based on the current minutes/seconds to keep it deterministic but shifting
+  const activeTip = breakTips[(minutes + seconds) % breakTips.length];
+
   return (
     <div>
       <div className={`${styles.countdownContainer} ${isBreakActive ? styles.countdownBreak : ''}`}>  
@@ -32,6 +44,14 @@ export function Countdown(){
           <span>{secondRight}</span>
         </div>
       </div>
+
+      {isBreakActive && (
+        <div className={styles.cooldownCard}>
+          <h4>{activeTip.title}</h4>
+          <p>{activeTip.desc}</p>
+        </div>
+      )}
+
       {isBreakActive ? (
         <button 
           type="button" 
@@ -58,6 +78,7 @@ export function Countdown(){
               onClick={resetCountdown}
             >
               Abandonar o ciclo
+
               <img src="icons/stop.svg" alt="check"/>
             </button>
           ) : (

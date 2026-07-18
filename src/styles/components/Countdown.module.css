@@ -106,3 +106,38 @@
     background: #0284c7 !important;
     box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35) !important;
 }
+
+.cooldownCard {
+    background: rgba(56, 189, 248, 0.05);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: var(--border-radius-lg);
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+    text-align: left;
+    transition: var(--transition-smooth);
+    animation: slideDown 0.3s ease-out;
+}
+
+.cooldownCard h4 {
+    color: var(--blue-twitter);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.cooldownCard p {
+    color: var(--text);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
