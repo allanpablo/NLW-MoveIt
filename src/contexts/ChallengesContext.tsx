@@ -81,6 +81,11 @@ interface ChallengesContextData {
     completeBreakTask: () => void;
     isMuted: boolean;
     toggleMute: () => void;
+    isSettingsModalOpen: boolean;
+    openSettingsModal: () => void;
+    closeSettingsModal: () => void;
+    updatePassword: (newPass: string) => void;
+    updateProfile: (name: string, company: string, sector: string, avatar: string) => void;
 }
 
 interface ChallengesProviderProps {
@@ -136,6 +141,32 @@ export function ChallengesProvider({
   }
 
   const [breakTaskCompleted, setBreakTaskCompleted] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+
+  function openSettingsModal() {
+    setIsSettingsModalOpen(true);
+  }
+
+  function closeSettingsModal() {
+    setIsSettingsModalOpen(false);
+  }
+
+  function updatePassword(newPass: string) {
+    if (!userEmail) return;
+    const db = getUsersDatabase();
+    const idx = db.findIndex(u => u.email === userEmail);
+    if (idx >= 0) {
+      db[idx].password = newPass;
+      saveUsersDatabase(db);
+    }
+  }
+
+  function updateProfile(name: string, company: string, sector: string, avatar: string) {
+    setUserName(name);
+    setUserCompany(company);
+    setUserSector(sector);
+    setUserAvatar(avatar);
+  }
 
   function completeBreakTask() {
     if (breakTaskCompleted) return;
@@ -431,7 +462,12 @@ export function ChallengesProvider({
           breakTaskCompleted,
           completeBreakTask,
           isMuted,
-          toggleMute
+          toggleMute,
+          isSettingsModalOpen,
+          openSettingsModal,
+          closeSettingsModal,
+          updatePassword,
+          updateProfile
         }}
     >
       {children}

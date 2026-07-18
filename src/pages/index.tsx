@@ -12,6 +12,7 @@ import { ChallengesProvider, ChallengesContext } from "../contexts/ChallengesCon
 import { Login } from "../Components/Login";
 import { Leaderboard } from "../Components/Leaderboard";
 import { Header } from "../Components/Header";
+import { SettingsModal } from "../Components/SettingsModal";
 
 interface HomeProps {
   level: number;
@@ -28,7 +29,7 @@ interface HomeProps {
 }
 
 function HomeContent() {
-  const { isLoggedIn } = useContext(ChallengesContext);
+  const { isLoggedIn, isSettingsModalOpen } = useContext(ChallengesContext);
 
   if (!isLoggedIn) {
     return <Login />;
@@ -54,6 +55,8 @@ function HomeContent() {
         </section>
         <Leaderboard />
       </CountdownProvider>
+
+      {isSettingsModalOpen && <SettingsModal />}
     </div>
   );
 }
