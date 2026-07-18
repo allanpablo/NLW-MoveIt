@@ -11,6 +11,7 @@ import { GetServerSideProps } from 'next';
 import { ChallengesProvider, ChallengesContext } from "../contexts/ChallengesContext";
 import { Login } from "../Components/Login";
 import { Leaderboard } from "../Components/Leaderboard";
+import { Header } from "../Components/Header";
 
 interface HomeProps {
   level: number;
@@ -38,6 +39,7 @@ function HomeContent() {
       <Head>
         <title>Início | Move.it</title>
       </Head>
+      <Header />
       <ExperienceBar />
       <CountdownProvider>
         <section>

@@ -1,30 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { ChallengesContext, ALL_BADGES } from '../contexts/ChallengesContext';
 import styles from '../styles/components/Profile.module.css';
 
 export function Profile(){
-    const { level, currentStreak, unlockedBadges, userName, userAvatar, userSector, userCompany, logout } = useContext(ChallengesContext);
-    const [isDark, setIsDark] = useState(false);
-
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            setIsDark(true);
-            document.body.classList.add('dark');
-        }
-    }, []);
-
-    function handleToggleTheme() {
-        if (isDark) {
-            document.body.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-            setIsDark(false);
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-            setIsDark(true);
-        }
-    }
+    const { level, currentStreak, unlockedBadges, userName, userAvatar, userSector, userCompany } = useContext(ChallengesContext);
 
     const sectorName = userSector === 'ti' ? 'TI & Engenharia' 
                      : userSector === 'vendas' ? 'Vendas & Growth'
@@ -39,14 +18,6 @@ export function Profile(){
                 <div>
                     <div className={styles.nameRow}>
                         <strong>{userName || "Allan Pablo"}</strong>
-                        <div className={styles.profileButtons}>
-                            <button type="button" onClick={handleToggleTheme} className={styles.themeToggle}>
-                                {isDark ? '☀️' : '🌙'}
-                            </button>
-                            <button type="button" onClick={logout} className={styles.logoutBtn} title="Sair da conta">
-                                🚪
-                            </button>
-                        </div>
                     </div>
                     <p className={styles.sectorMeta}>
                       Empresa: <strong>{userCompany || "Geral"}</strong>
