@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { CountdownContext } from '../contexts/CountdownContext';
+import { ChallengesContext } from '../contexts/ChallengesContext';
 import styles from '../styles/components/Countdown.module.css';
-
-
+import confetti from 'canvas-confetti';
 
 export function Countdown(){
   const {
@@ -15,6 +15,8 @@ export function Countdown(){
     resetCountdown,
     skipBreak
   } = useContext(CountdownContext)
+
+  const { breakTaskCompleted, completeBreakTask } = useContext(ChallengesContext);
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2,'0').split('');
   const [secondLeft, secondRight] = String(seconds).padStart(2,'0').split('');
@@ -30,6 +32,15 @@ export function Countdown(){
 
   // Pick a tip based on the current minutes/seconds to keep it deterministic but shifting
   const activeTip = breakTips[(minutes + seconds) % breakTips.length];
+
+  function handleCompleteBreakTask() {
+    completeBreakTask();
+    confetti({
+      particleCount: 60,
+      spread: 50,
+      origin: { y: 0.8 }
+    });
+  }
 
   return (
     <div>
@@ -49,6 +60,15 @@ export function Countdown(){
         <div className={styles.cooldownCard}>
           <h4>{activeTip.title}</h4>
           <p>{activeTip.desc}</p>
+          
+          <button
+            type="button"
+            disabled={breakTaskCompleted}
+            onClick={handleCompleteBreakTask}
+            className={`${styles.breakTaskBtn} ${breakTaskCompleted ? styles.breakTaskDone : ''}`}
+          >
+            {breakTaskCompleted ? "✅ Atividade Concluída! (+15 XP)" : "🧘 Concluí a Atividade (+15 XP)"}
+          </button>
         </div>
       )}
 

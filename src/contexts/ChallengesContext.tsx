@@ -77,6 +77,8 @@ interface ChallengesContextData {
     signIn: (email: string, password: string) => boolean;
     logout: () => void;
     getUsersDatabase: () => UserDbEntry[];
+    breakTaskCompleted: boolean;
+    completeBreakTask: () => void;
 }
 
 interface ChallengesProviderProps {
@@ -112,6 +114,20 @@ export function ChallengesProvider({
   const [userEmail, setUserEmail] = useState(rest.userEmail ?? "");
   const [isLoggedIn, setIsLoggedIn] = useState(rest.isLoggedIn ?? false);
   
+  const [breakTaskCompleted, setBreakTaskCompleted] = useState(false);
+
+  function completeBreakTask() {
+    if (breakTaskCompleted) return;
+    setBreakTaskCompleted(true);
+    
+    let finalExperience = currentExperience + 15;
+    if (finalExperience >= experienceToNextLevel) {
+      finalExperience = finalExperience - experienceToNextLevel;
+      levelUp();
+    }
+    setCurrentExperience(finalExperience);
+  }
+
   const initialBadges = () => {
     try {
       return rest.unlockedBadges ? JSON.parse(rest.unlockedBadges) : [];
@@ -316,6 +332,7 @@ export function ChallengesProvider({
   function resetChallenge(){
       setActiveChallenge(null);
       setCurrentStreak(0);
+      setBreakTaskCompleted(false);
   }
 
   function completeChallenge(){
@@ -331,6 +348,7 @@ export function ChallengesProvider({
     }
     setCurrentExperience(finalExperience);
     setActiveChallenge(null);
+    setBreakTaskCompleted(false);
     const newCompletedCount = challengesCompleted + 1;
     setChallengesCompleted(newCompletedCount);
     
@@ -386,7 +404,9 @@ export function ChallengesProvider({
           signUp,
           signIn,
           logout,
-          getUsersDatabase
+          getUsersDatabase,
+          breakTaskCompleted,
+          completeBreakTask
         }}
     >
       {children}
