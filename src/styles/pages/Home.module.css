@@ -12,7 +12,7 @@
 .dashboardGrid {
     flex: 1;
     display: grid;
-    grid-template-columns: 1.15fr 1fr 1.25fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1.25rem;
     overflow: hidden;
     height: calc(100vh - 160px); /* Restricts panel heights to prevent scrolling */
