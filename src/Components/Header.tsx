@@ -3,7 +3,7 @@ import { ChallengesContext } from "../contexts/ChallengesContext";
 import styles from "../styles/components/Header.module.css";
 
 export function Header() {
-  const { userName, userAvatar, userCompany, userSector, logout } = useContext(ChallengesContext);
+  const { userName, userAvatar, userCompany, userSector, logout, isMuted, toggleMute } = useContext(ChallengesContext);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -50,6 +50,15 @@ export function Header() {
           title={isDark ? "Ativar Modo Claro" : "Ativar Modo Escuro"}
         >
           {isDark ? "☀️" : "🌙"}
+        </button>
+
+        <button 
+          type="button" 
+          onClick={toggleMute} 
+          className={styles.themeToggleBtn}
+          title={isMuted ? "Ativar Som" : "Silenciar Notificações"}
+        >
+          {isMuted ? "🔇" : "🔊"}
         </button>
 
         <div className={styles.userDropdown}>

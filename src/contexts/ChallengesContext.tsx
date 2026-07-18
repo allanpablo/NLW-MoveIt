@@ -79,6 +79,8 @@ interface ChallengesContextData {
     getUsersDatabase: () => UserDbEntry[];
     breakTaskCompleted: boolean;
     completeBreakTask: () => void;
+    isMuted: boolean;
+    toggleMute: () => void;
 }
 
 interface ChallengesProviderProps {
@@ -114,6 +116,25 @@ export function ChallengesProvider({
   const [userEmail, setUserEmail] = useState(rest.userEmail ?? "");
   const [isLoggedIn, setIsLoggedIn] = useState(rest.isLoggedIn ?? false);
   
+  const [isMuted, setIsMuted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedMute = localStorage.getItem("workrats:muted");
+      if (savedMute === "true") {
+        setIsMuted(true);
+      }
+    }
+  }, []);
+
+  function toggleMute() {
+    setIsMuted(prev => {
+      const newVal = !prev;
+      localStorage.setItem("workrats:muted", String(newVal));
+      return newVal;
+    });
+  }
+
   const [breakTaskCompleted, setBreakTaskCompleted] = useState(false);
 
   function completeBreakTask() {
@@ -321,7 +342,9 @@ export function ChallengesProvider({
 
     setActiveChallenge(challenge)
 
-    new Audio ('/notification.mp3').play()
+    if (!isMuted) {
+      new Audio('/notification.mp3').play().catch(() => {});
+    }
 
     if (Notification.permission ==='granted'){
       new Notification('Novo Desafio 📣', {
@@ -406,7 +429,9 @@ export function ChallengesProvider({
           logout,
           getUsersDatabase,
           breakTaskCompleted,
-          completeBreakTask
+          completeBreakTask,
+          isMuted,
+          toggleMute
         }}
     >
       {children}

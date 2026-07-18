@@ -24,7 +24,7 @@ export const CountdownContext = createContext ({} as CountdownContextData);
 let countdownTimeout: NodeJS.Timeout;
 
 export function CountdownProvider({children}: CountdownProviderProps){
-    const { startNewChallenge, userSector, completeChallenge, resetChallenge } = useContext(ChallengesContext);
+    const { startNewChallenge, userSector, completeChallenge, resetChallenge, isMuted } = useContext(ChallengesContext);
     
     // Find sector time (default to 25 mins)
     const sectorInfo = SECTORS.find(s => s.id === userSector);
@@ -98,7 +98,9 @@ export function CountdownProvider({children}: CountdownProviderProps){
                 // Break finished, return to work
                 setIsBreakActive(false);
                 setTime(workTime);
-                new Audio('/notification.mp3').play();
+                if (!isMuted) {
+                    new Audio('/notification.mp3').play().catch(() => {});
+                }
                 if (Notification.permission === 'granted') {
                     new Notification('Pausa Encerrada! 🚀', {
                         body: 'Hora de voltar ao foco! Inicie um novo ciclo.'
