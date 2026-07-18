@@ -91,3 +91,18 @@
     margin-left: 0.75rem;
     filter: brightness(1.2);
 }
+
+.countdownBreak > div {
+    border-color: var(--blue-twitter) !important;
+    box-shadow: 0 4px 30px rgba(56, 189, 248, 0.15) !important;
+}
+
+.countdownBreakButton {
+    background: var(--blue-twitter) !important;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25) !important;
+}
+
+.countdownBreakButton:hover {
+    background: #0284c7 !important;
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35) !important;
+}

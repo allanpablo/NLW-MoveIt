@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "canvas-confetti": "^1.9.4",
     "forjajs": "^1.1.6",
     "js-cookie": "^2.2.1",
     "next": "^16.2.10",
@@ -15,6 +16,7 @@
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/js-cookie": "^2.2.6",
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
