@@ -21,6 +21,8 @@ interface HomeProps {
   userName: string;
   userAvatar: string;
   userSector: string;
+  userCompany: string;
+  userEmail: string;
   isLoggedIn: boolean;
 }
 
@@ -65,6 +67,8 @@ export default function Home(props: HomeProps) {
       userName={props.userName}
       userAvatar={props.userAvatar}
       userSector={props.userSector}
+      userCompany={props.userCompany}
+      userEmail={props.userEmail}
       isLoggedIn={props.isLoggedIn}
     >
       <HomeContent />
@@ -82,6 +86,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     userName,
     userAvatar,
     userSector,
+    userCompany,
+    userEmail,
     isLoggedIn 
   } = ctx.req.cookies;
 
@@ -95,6 +101,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       userName: userName ?? "",
       userAvatar: userAvatar ?? "",
       userSector: userSector ?? "",
+      userCompany: userCompany ?? "",
+      userEmail: userEmail ?? "",
       isLoggedIn: isLoggedIn === "true"
     }
   };
