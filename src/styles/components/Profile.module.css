@@ -189,3 +189,64 @@
         box-shadow: 0 0 0 0 rgba(255, 90, 121, 0);
     }
 }
+
+.badgeTooltip {
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 180px;
+    background: rgba(26, 26, 36, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.75rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    z-index: 100;
+    text-align: center;
+}
+
+body.dark .badgeTooltip {
+    background: rgba(13, 13, 18, 0.98);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.badgeTooltip strong {
+    display: block;
+    color: #fff;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.badgeTooltip p {
+    color: #a0a0b0;
+    font-size: 0.7rem !important;
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+}
+
+.tooltipUnlocked,
+.tooltipLocked {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+}
+
+.tooltipUnlocked {
+    background: rgba(52, 211, 153, 0.1);
+    color: var(--green);
+}
+
+.tooltipLocked {
+    background: rgba(255, 255, 255, 0.05);
+    color: #808090;
+}
+
+.badgeCard:hover .badgeTooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

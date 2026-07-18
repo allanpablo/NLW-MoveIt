@@ -3,7 +3,7 @@ import { ChallengesContext, ALL_BADGES } from '../contexts/ChallengesContext';
 import styles from '../styles/components/Profile.module.css';
 
 export function Profile(){
-    const { level, currentStreak, unlockedBadges, userName, userAvatar, userSector, logout } = useContext(ChallengesContext);
+    const { level, currentStreak, unlockedBadges, userName, userAvatar, userSector, userCompany, logout } = useContext(ChallengesContext);
     const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
@@ -49,11 +49,14 @@ export function Profile(){
                         </div>
                     </div>
                     <p className={styles.sectorMeta}>
+                      Empresa: <strong>{userCompany || "Geral"}</strong>
+                    </p>
+                    <p className={styles.sectorMeta}>
                       Setor: <span>{sectorName}</span>
                     </p>
                     <p>
-                        <img src="icons/level.svg" alt="Level"/>
-                        Level {level}
+                      <img src="icons/level.svg" alt="Level"/>
+                      Level {level}
                     </p>
                     {currentStreak > 0 && (
                         <span className={styles.streakBadge}>
@@ -72,10 +75,17 @@ export function Profile(){
                             <div 
                                 key={badge.id} 
                                 className={`${styles.badgeCard} ${isUnlocked ? styles.unlocked : styles.locked}`}
-                                title={`${badge.name}: ${badge.description}`}
                             >
                                 <span className={styles.badgeIcon}>{badge.icon}</span>
                                 <span className={styles.badgeName}>{badge.name}</span>
+                                
+                                <div className={styles.badgeTooltip}>
+                                    <strong>{badge.name}</strong>
+                                    <p>{badge.description}</p>
+                                    <span className={isUnlocked ? styles.tooltipUnlocked : styles.tooltipLocked}>
+                                        {isUnlocked ? "✅ Desbloqueada" : "🔒 Bloqueada"}
+                                    </span>
+                                </div>
                             </div>
                         );
                     })}
