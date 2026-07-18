@@ -16,6 +16,26 @@
   --blue: #5965e0;
   --blue-dark: #4953b8;
   --blue-twitter: #2aa9e0;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --card-bg: #fff;
+  --border-radius-lg: 12px;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark {
+  --white: #1a1a24;
+  --background: #0d0d12;
+  --gray-line: #2d2d3d;
+  --text: #b3b3cc;
+  --text-highlight: #4953b8;
+  --title: #f3f3fa;
+  --red: #ff5773;
+  --green: #34d399;
+  --blue: #6366f1;
+  --blue-dark: #4f46e5;
+  --blue-twitter: #38bdf8;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --card-bg: #14141d;
 }
 
 @media (max-width: 1080px) {
@@ -32,6 +52,7 @@
 body {
   background: var(--background);
   color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body,

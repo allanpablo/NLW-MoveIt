@@ -1,6 +1,5 @@
-import { Children, createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { ChallengesContext } from "./ChallengesContext";
-
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { ChallengesContext, SECTORS } from "./ChallengesContext";
 
 interface CountdownContextData{
     minutes: number;
@@ -20,14 +19,25 @@ export const CountdownContext = createContext ({} as CountdownContextData);
 let countdownTimeout: NodeJS.Timeout;
 
 export function CountdownProvider({children}: CountdownProviderProps){
-    const {startNewChallenge } = useContext(ChallengesContext);
-    const [time, setTime] = useState(0.5*60);
+    const { startNewChallenge, userSector } = useContext(ChallengesContext);
+    
+    // Find sector time (default to 25 mins)
+    const sectorInfo = SECTORS.find(s => s.id === userSector);
+    const initialTime = sectorInfo ? sectorInfo.pomodoroTime * 60 : 25 * 60;
+    
+    const [time, setTime] = useState(initialTime);
     const [isActive, setIsActive] = useState(false);
     const [hasFinished, setHasFinished] = useState(false);
   
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
 
+    // Synchronize initial time if user changes sector when countdown is not active
+    useEffect(() => {
+        if (!isActive && !hasFinished) {
+            setTime(initialTime);
+        }
+    }, [userSector, initialTime, isActive, hasFinished]);
 
     function startCountdown(){
         setIsActive(true);
@@ -36,7 +46,7 @@ export function CountdownProvider({children}: CountdownProviderProps){
       function resetCountdown(){
         clearTimeout(countdownTimeout);
         setIsActive(false);
-        setTime(25*60);
+        setTime(initialTime);
         setHasFinished(false);
       } 
     
@@ -50,7 +60,7 @@ export function CountdownProvider({children}: CountdownProviderProps){
           setIsActive(false);
           startNewChallenge();
         }
-      }, [isActive, time])
+      }, [isActive, time, startNewChallenge])
 
     return(
         <CountdownContext.Provider value={{

@@ -1,0 +1,14 @@
+{
+  "version": "0.5.0",
+  "skills": [
+    { "id": "triage", "path": "skills/triage-task/SKILL.md", "description": "Classificação de tarefas" },
+    { "id": "compaction", "path": "skills/context-compaction/SKILL.md", "description": "Compactação de memória" },
+    { "id": "handoff", "path": "skills/handoff/SKILL.md", "description": "Protocolo de transição" },
+    { "id": "nest-api", "path": "skills/nest-api/SKILL.md", "description": "Geração de endpoints NestJS" },
+    { "id": "self-healing", "path": "skills/self-healing/SKILL.md", "description": "Resolução autônoma de erros" },
+    { "id": "validate-handoff", "path": "skills/validate-handoff/SKILL.md", "description": "Checklist de qualidade de handoff" },
+    { "id": "ui-fidelity", "path": "skills/ui-fidelity/SKILL.md", "description": "Auditoria estética de UI" },
+    { "id": "reasoning", "path": "skills/reasoning-protocol/SKILL.md", "description": "Protocolo de raciocínio lógico" },
+    { "id": "llm-provider-routing", "path": "skills/llm-provider-routing/SKILL.md", "description": "Roteamento multi-LLM por papel" }
+  ]
+}

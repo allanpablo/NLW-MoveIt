@@ -1,0 +1,31 @@
+{
+  "active_engine": "copilot",
+  "fallback_chain": [
+    "copilot",
+    "claude",
+    "gemini",
+    "codex"
+  ],
+  "engines": {
+    "copilot": {
+      "name": "COPILOT",
+      "instruction_file": ".ia-instructions/copilot.md",
+      "status": "ready"
+    },
+    "claude": {
+      "name": "CLAUDE",
+      "instruction_file": ".ia-instructions/claude.md",
+      "status": "ready"
+    },
+    "gemini": {
+      "name": "GEMINI",
+      "instruction_file": ".ia-instructions/gemini.md",
+      "status": "ready"
+    },
+    "codex": {
+      "name": "CODEX",
+      "instruction_file": ".ia-instructions/codex.md",
+      "status": "ready"
+    }
+  }
+}

@@ -1,28 +1,191 @@
-.profileContainer{
+.profileArea {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.profileContainer {
     display: flex;
     align-items: center;
+    background: var(--white);
+    padding: 1.2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 30px var(--shadow);
+    border: 1px solid var(--gray-line);
+    transition: var(--transition-smooth);
 }
 
 .profileContainer > img {
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 4.5rem;
+    height: 4.5rem;
     border-radius: 50%;
+    border: 2px solid var(--blue);
 }
 
-.profileContainer div{
-    margin-left: 1.5rem;
+.profileContainer > div {
+    margin-left: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
-.profileContainer div strong {
-    font-size: 1.5rem;
+.nameRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.nameRow strong {
+    font-size: 1.3rem;
     font-weight: 600;
     color: var(--title);
+    transition: var(--transition-smooth);
 }
 
-.profileContainer div p {
-    font-size: 1rem;
-    margin-top: 0.5rem ;
+.profileButtons {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
-.profileContainer div p img {
-       margin-right: 0.5rem ;
+
+.themeToggle,
+.logoutBtn {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.themeToggle:hover,
+.logoutBtn:hover {
+    transform: scale(1.15);
+}
+
+.sectorMeta {
+    font-size: 0.8rem !important;
+    color: var(--text);
+    margin-bottom: 0.15rem;
+}
+
+.sectorMeta span {
+    font-weight: 600;
+    color: var(--blue);
+}
+
+.profileContainer p {
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    color: var(--text);
+}
+
+.profileContainer p img {
+    margin-right: 0.4rem;
+}
+
+.streakBadge {
+    display: inline-block;
+    align-self: flex-start;
+    background: linear-gradient(135deg, rgba(255, 90, 121, 0.1), rgba(255, 150, 50, 0.1));
+    border: 1px solid rgba(255, 90, 121, 0.2);
+    color: var(--red);
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    margin-top: 0.25rem;
+    animation: pulse 2s infinite;
+}
+
+.badgesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: var(--white);
+    padding: 1.2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 30px var(--shadow);
+    border: 1px solid var(--gray-line);
+    transition: var(--transition-smooth);
+}
+
+.badgesContainer h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--title);
+    transition: var(--transition-smooth);
+    border-bottom: 1px solid var(--gray-line);
+    padding-bottom: 0.5rem;
+}
+
+.badgesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    gap: 0.6rem;
+}
+
+.badgeCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--gray-line);
+    text-align: center;
+    transition: var(--transition-smooth);
+    position: relative;
+    cursor: help;
+}
+
+.badgeIcon {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+    transition: var(--transition-smooth);
+}
+
+.badgeName {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text);
+    word-break: break-word;
+}
+
+.unlocked {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(52, 211, 153, 0.05));
+    border-color: var(--blue);
+}
+
+.unlocked .badgeIcon {
+    filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.4));
+}
+
+.locked {
+    opacity: 0.45;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.locked .badgeIcon {
+    filter: grayscale(1);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 90, 121, 0.2);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(255, 90, 121, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 90, 121, 0);
+    }
 }

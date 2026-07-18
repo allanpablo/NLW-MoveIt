@@ -1,0 +1,9 @@
+{
+  "strategy": "hierarchical",
+  "maxContextHint": "1M+ por segmentacao e resumo incremental",
+  "handoffDir": "memory/50-orchestration/handoffs",
+  "summaryDir": "memory/70-summaries",
+  "sqlitePath": ".memory/sqlite/context.db",
+  "language": "pt-BR",
+  "backendDefault": "nestjs"
+}
