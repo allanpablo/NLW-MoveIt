@@ -48,6 +48,9 @@ export function CountdownProvider({children}: CountdownProviderProps){
     }, [userSector, workTime, isActive, hasFinished, isBreakActive]);
 
     function startCountdown(){
+        if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
         setIsActive(true);
     }
     
@@ -103,7 +106,8 @@ export function CountdownProvider({children}: CountdownProviderProps){
                 }
                 if (Notification.permission === 'granted') {
                     new Notification('Pausa Encerrada! 🚀', {
-                        body: 'Hora de voltar ao foco! Inicie um novo ciclo.'
+                        body: 'Hora de voltar ao foco! Inicie um novo ciclo.',
+                        icon: '/icons/level-up.svg'
                     });
                 }
             }

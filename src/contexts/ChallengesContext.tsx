@@ -360,7 +360,8 @@ export function ChallengesProvider({
         const badge = ALL_BADGES.find(b => b.id === badgeId);
         if (badge) {
           new Notification('Medalha Desbloqueada! 🎖️', {
-            body: `${badge.icon} ${badge.name}: ${badge.description}`
+            body: `${badge.icon} ${badge.name}: ${badge.description}`,
+            icon: '/icons/level-up.svg'
           });
         }
       }
@@ -377,9 +378,11 @@ export function ChallengesProvider({
       new Audio('/notification.mp3').play().catch(() => {});
     }
 
-    if (Notification.permission ==='granted'){
-      new Notification('Novo Desafio 📣', {
-       body: `Valendo ${challenge.amount}xp!`})
+    if (Notification.permission === 'granted') {
+      new Notification('Novo Desafio Laboral! 📣', {
+        body: `Valendo ${challenge.amount} XP! Alongamento: ${challenge.description}`,
+        icon: `/icons/level-up.svg`
+      });
     }
   }
 
