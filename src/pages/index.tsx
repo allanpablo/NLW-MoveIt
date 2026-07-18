@@ -13,6 +13,7 @@ import { Login } from "../Components/Login";
 import { Leaderboard } from "../Components/Leaderboard";
 import { Header } from "../Components/Header";
 import { SettingsModal } from "../Components/SettingsModal";
+import { ActivityChart } from "../Components/ActivityChart";
 
 interface HomeProps {
   level: number;
@@ -47,6 +48,7 @@ function HomeContent() {
           <div>
             <Profile />
             <CompletedChallenges />
+            <ActivityChart />
             <Countdown />
           </div>
           <div>
