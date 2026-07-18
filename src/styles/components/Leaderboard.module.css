@@ -34,6 +34,30 @@
   color: var(--title);
 }
 
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.intervalSelect {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--gray-line);
+  background: var(--white);
+  color: var(--title);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+body.dark .intervalSelect {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
 .tabSwitcher {
   display: flex;
   gap: 0.25rem;

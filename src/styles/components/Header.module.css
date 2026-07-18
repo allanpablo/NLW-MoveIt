@@ -82,6 +82,19 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--title);
+  line-height: 1.1;
+}
+
+.nameAndTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.usertitle {
+  font-size: 0.72rem;
+  color: var(--blue);
+  font-weight: 700;
+  margin-top: 0.15rem;
 }
 
 .logoutButton {

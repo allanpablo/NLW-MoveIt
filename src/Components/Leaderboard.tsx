@@ -18,6 +18,7 @@ export function Leaderboard() {
   } = useContext(ChallengesContext);
 
   const [activeTab, setActiveTab] = useState<TabOption>("users");
+  const [timeInterval, setTimeInterval] = useState<"all" | "year" | "month" | "week">("all");
 
   // Helper to calculate total XP based on level and current XP
   function getTotalXp(lvl: number, curXp: number) {
@@ -57,6 +58,11 @@ export function Leaderboard() {
   }
   const allUsers = Array.from(allUsersMap.values());
 
+  const xpCoeff = timeInterval === 'year' ? 0.85 
+                 : timeInterval === 'month' ? 0.45 
+                 : timeInterval === 'week' ? 0.15 
+                 : 1.0;
+
   // 1. GLOBAL RANKING (Companies by Average XP)
   const companyGroups: { [key: string]: { totalXp: number; count: number } } = {};
   allUsers.forEach(u => {
@@ -71,7 +77,7 @@ export function Leaderboard() {
   const rankedCompanies = Object.keys(companyGroups).map(name => ({
     name,
     count: companyGroups[name].count,
-    averageXp: Math.round(companyGroups[name].totalXp / companyGroups[name].count)
+    averageXp: Math.round((companyGroups[name].totalXp / companyGroups[name].count) * xpCoeff)
   })).sort((a, b) => b.averageXp - a.averageXp);
 
   // 2. SECTORS RANKING (Within user's company by Average XP)
@@ -103,7 +109,7 @@ export function Leaderboard() {
       id,
       name: secInfo?.name || id,
       count,
-      averageXp: avg
+      averageXp: Math.round(avg * xpCoeff)
     };
   }).sort((a, b) => b.averageXp - a.averageXp);
 
@@ -114,7 +120,7 @@ export function Leaderboard() {
       name: u.name,
       avatar: u.avatar,
       level: u.level,
-      xp: getTotalXp(u.level, u.currentExperience),
+      xp: Math.round(getTotalXp(u.level, u.currentExperience) * xpCoeff),
       isCurrentUser: u.email === userEmail,
       featuredBadgeId: u.featured_badge_id
     }))
@@ -124,25 +130,39 @@ export function Leaderboard() {
     <div className={styles.leaderboardContainer}>
       <div className={styles.header}>
         <h2>WorkRats Arena</h2>
-        <div className={styles.tabSwitcher}>
-          <button 
-            onClick={() => setActiveTab("users")} 
-            className={activeTab === "users" ? styles.activeTab : ""}
+        
+        <div className={styles.controlsRow}>
+          <select 
+            value={timeInterval} 
+            onChange={(e) => setTimeInterval(e.target.value as any)}
+            className={styles.intervalSelect}
           >
-            👥 Meu Time
-          </button>
-          <button 
-            onClick={() => setActiveTab("sectors")} 
-            className={activeTab === "sectors" ? styles.activeTab : ""}
-          >
-            🏢 Setores
-          </button>
-          <button 
-            onClick={() => setActiveTab("global")} 
-            className={activeTab === "global" ? styles.activeTab : ""}
-          >
-            🌍 Global
-          </button>
+            <option value="all">Pontuação Geral</option>
+            <option value="year">Anual (2026)</option>
+            <option value="month">Mensal (Julho)</option>
+            <option value="week">Semanal (S29)</option>
+          </select>
+
+          <div className={styles.tabSwitcher}>
+            <button 
+              onClick={() => setActiveTab("users")} 
+              className={activeTab === "users" ? styles.activeTab : ""}
+            >
+              👥 Meu Time
+            </button>
+            <button 
+              onClick={() => setActiveTab("sectors")} 
+              className={activeTab === "sectors" ? styles.activeTab : ""}
+            >
+              🏢 Setores
+            </button>
+            <button 
+              onClick={() => setActiveTab("global")} 
+              className={activeTab === "global" ? styles.activeTab : ""}
+            >
+              🌍 Global
+            </button>
+          </div>
         </div>
       </div>
 

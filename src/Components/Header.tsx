@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { ChallengesContext } from "../contexts/ChallengesContext";
+import { ChallengesContext, ALL_BADGES } from "../contexts/ChallengesContext";
 import styles from "../styles/components/Header.module.css";
 
 export function Header() {
-  const { userName, userAvatar, userCompany, userSector, logout, isMuted, toggleMute, openSettingsModal, openSquadModal } = useContext(ChallengesContext);
+  const { userName, userAvatar, userCompany, userSector, logout, isMuted, toggleMute, openSettingsModal, openSquadModal, featuredBadgeId } = useContext(ChallengesContext);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -81,7 +81,12 @@ export function Header() {
 
         <div className={styles.userDropdown}>
           <img src={userAvatar} alt={userName} className={styles.avatar} />
-          <span className={styles.username}>{userName}</span>
+          <div className={styles.nameAndTitle}>
+            <span className={styles.username}>{userName}</span>
+            <span className={styles.usertitle}>
+              {featuredBadgeId ? `T1: ${ALL_BADGES.find(b => b.id === featuredBadgeId)?.name}` : "T1: Recruta"}
+            </span>
+          </div>
         </div>
 
         <button 
