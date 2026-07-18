@@ -26,6 +26,7 @@
     flex-direction: column;
     gap: 1rem;
     overflow-y: auto; /* Independent inner scrollbar */
+    overflow-x: hidden;
     padding-right: 0.25rem;
 }
 

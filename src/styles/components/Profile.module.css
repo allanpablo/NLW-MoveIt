@@ -5,16 +5,10 @@
 }
 
 .statsOverviewContainer {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     width: 100%;
-}
-
-@media (min-width: 480px) {
-    .statsOverviewContainer {
-        grid-template-columns: 1fr 1fr;
-    }
 }
 
 .statItem {
