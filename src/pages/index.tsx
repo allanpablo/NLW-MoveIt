@@ -52,12 +52,12 @@ function HomeContent() {
           </div>
           
           <div className={styles.centerColumn}>
-            <Countdown />
             <ChallengeBox />
           </div>
           
           <div className={styles.rightColumn}>
             <Leaderboard />
+            <Countdown />
           </div>
         </main>
       </CountdownProvider>
