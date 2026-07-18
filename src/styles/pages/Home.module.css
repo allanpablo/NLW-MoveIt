@@ -1,36 +1,71 @@
 .container {
-    min-height: 100vh;
-    max-width: 992px;
+    height: 100vh;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 2.5rem 2rem;
+    padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
+    overflow: hidden; /* Restricts overflow on the viewport */
+    gap: 0.75rem;
 }
 
-.container section {
+.dashboardGrid {
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-content: center;
+    grid-template-columns: 1.15fr 1fr 1.25fr;
+    gap: 1.25rem;
+    overflow: hidden;
+    height: calc(100vh - 160px); /* Restricts panel heights to prevent scrolling */
     align-items: stretch;
 }
 
-.container section > div {
+.leftColumn,
+.centerColumn,
+.rightColumn {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
+    overflow-y: auto; /* Independent inner scrollbar */
+    padding-right: 0.25rem;
 }
 
-@media (max-width: 768px) {
+/* Custom scrollbars for dashboard columns */
+.leftColumn::-webkit-scrollbar,
+.centerColumn::-webkit-scrollbar,
+.rightColumn::-webkit-scrollbar {
+    width: 5px;
+}
+
+.leftColumn::-webkit-scrollbar-thumb,
+.centerColumn::-webkit-scrollbar-thumb,
+.rightColumn::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+body.dark .leftColumn::-webkit-scrollbar-thumb,
+body.dark .centerColumn::-webkit-scrollbar-thumb,
+body.dark .rightColumn::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 900px) {
     .container {
-        padding: 1.5rem 1rem;
+        height: auto;
+        overflow: auto;
     }
     
-    .container section {
+    .dashboardGrid {
         grid-template-columns: 1fr;
+        height: auto;
+        overflow: visible;
         gap: 2rem;
+    }
+    
+    .leftColumn,
+    .centerColumn,
+    .rightColumn {
+        overflow-y: visible;
+        height: auto;
     }
 }

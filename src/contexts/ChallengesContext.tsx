@@ -77,6 +77,15 @@ interface ChallengesContextData {
     signIn: (email: string, password: string) => boolean;
     logout: () => void;
     getUsersDatabase: () => UserDbEntry[];
+    breakTaskCompleted: boolean;
+    completeBreakTask: () => void;
+    isMuted: boolean;
+    toggleMute: () => void;
+    isSettingsModalOpen: boolean;
+    openSettingsModal: () => void;
+    closeSettingsModal: () => void;
+    updatePassword: (newPass: string) => void;
+    updateProfile: (name: string, company: string, sector: string, avatar: string) => void;
 }
 
 interface ChallengesProviderProps {
@@ -112,6 +121,65 @@ export function ChallengesProvider({
   const [userEmail, setUserEmail] = useState(rest.userEmail ?? "");
   const [isLoggedIn, setIsLoggedIn] = useState(rest.isLoggedIn ?? false);
   
+  const [isMuted, setIsMuted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedMute = localStorage.getItem("workrats:muted");
+      if (savedMute === "true") {
+        setIsMuted(true);
+      }
+    }
+  }, []);
+
+  function toggleMute() {
+    setIsMuted(prev => {
+      const newVal = !prev;
+      localStorage.setItem("workrats:muted", String(newVal));
+      return newVal;
+    });
+  }
+
+  const [breakTaskCompleted, setBreakTaskCompleted] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+
+  function openSettingsModal() {
+    setIsSettingsModalOpen(true);
+  }
+
+  function closeSettingsModal() {
+    setIsSettingsModalOpen(false);
+  }
+
+  function updatePassword(newPass: string) {
+    if (!userEmail) return;
+    const db = getUsersDatabase();
+    const idx = db.findIndex(u => u.email === userEmail);
+    if (idx >= 0) {
+      db[idx].password = newPass;
+      saveUsersDatabase(db);
+    }
+  }
+
+  function updateProfile(name: string, company: string, sector: string, avatar: string) {
+    setUserName(name);
+    setUserCompany(company);
+    setUserSector(sector);
+    setUserAvatar(avatar);
+  }
+
+  function completeBreakTask() {
+    if (breakTaskCompleted) return;
+    setBreakTaskCompleted(true);
+    
+    let finalExperience = currentExperience + 15;
+    if (finalExperience >= experienceToNextLevel) {
+      finalExperience = finalExperience - experienceToNextLevel;
+      levelUp();
+    }
+    setCurrentExperience(finalExperience);
+  }
+
   const initialBadges = () => {
     try {
       return rest.unlockedBadges ? JSON.parse(rest.unlockedBadges) : [];
@@ -305,7 +373,9 @@ export function ChallengesProvider({
 
     setActiveChallenge(challenge)
 
-    new Audio ('/notification.mp3').play()
+    if (!isMuted) {
+      new Audio('/notification.mp3').play().catch(() => {});
+    }
 
     if (Notification.permission ==='granted'){
       new Notification('Novo Desafio 📣', {
@@ -316,6 +386,7 @@ export function ChallengesProvider({
   function resetChallenge(){
       setActiveChallenge(null);
       setCurrentStreak(0);
+      setBreakTaskCompleted(false);
   }
 
   function completeChallenge(){
@@ -331,6 +402,7 @@ export function ChallengesProvider({
     }
     setCurrentExperience(finalExperience);
     setActiveChallenge(null);
+    setBreakTaskCompleted(false);
     const newCompletedCount = challengesCompleted + 1;
     setChallengesCompleted(newCompletedCount);
     
@@ -386,7 +458,16 @@ export function ChallengesProvider({
           signUp,
           signIn,
           logout,
-          getUsersDatabase
+          getUsersDatabase,
+          breakTaskCompleted,
+          completeBreakTask,
+          isMuted,
+          toggleMute,
+          isSettingsModalOpen,
+          openSettingsModal,
+          closeSettingsModal,
+          updatePassword,
+          updateProfile
         }}
     >
       {children}

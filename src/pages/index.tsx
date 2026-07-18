@@ -11,6 +11,9 @@ import { GetServerSideProps } from 'next';
 import { ChallengesProvider, ChallengesContext } from "../contexts/ChallengesContext";
 import { Login } from "../Components/Login";
 import { Leaderboard } from "../Components/Leaderboard";
+import { Header } from "../Components/Header";
+import { SettingsModal } from "../Components/SettingsModal";
+import { ActivityChart } from "../Components/ActivityChart";
 
 interface HomeProps {
   level: number;
@@ -21,11 +24,13 @@ interface HomeProps {
   userName: string;
   userAvatar: string;
   userSector: string;
+  userCompany: string;
+  userEmail: string;
   isLoggedIn: boolean;
 }
 
 function HomeContent() {
-  const { isLoggedIn } = useContext(ChallengesContext);
+  const { isLoggedIn, isSettingsModalOpen } = useContext(ChallengesContext);
 
   if (!isLoggedIn) {
     return <Login />;
@@ -36,20 +41,28 @@ function HomeContent() {
       <Head>
         <title>Início | Move.it</title>
       </Head>
+      <Header />
       <ExperienceBar />
       <CountdownProvider>
-        <section>
-          <div>
+        <main className={styles.dashboardGrid}>
+          <div className={styles.leftColumn}>
             <Profile />
             <CompletedChallenges />
-            <Countdown />
+            <ActivityChart />
           </div>
-          <div>
+          
+          <div className={styles.centerColumn}>
+            <Countdown />
             <ChallengeBox />
           </div>
-        </section>
-        <Leaderboard />
+          
+          <div className={styles.rightColumn}>
+            <Leaderboard />
+          </div>
+        </main>
       </CountdownProvider>
+
+      {isSettingsModalOpen && <SettingsModal />}
     </div>
   );
 }
@@ -65,6 +78,8 @@ export default function Home(props: HomeProps) {
       userName={props.userName}
       userAvatar={props.userAvatar}
       userSector={props.userSector}
+      userCompany={props.userCompany}
+      userEmail={props.userEmail}
       isLoggedIn={props.isLoggedIn}
     >
       <HomeContent />
@@ -82,6 +97,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     userName,
     userAvatar,
     userSector,
+    userCompany,
+    userEmail,
     isLoggedIn 
   } = ctx.req.cookies;
 
@@ -95,6 +112,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       userName: userName ?? "",
       userAvatar: userAvatar ?? "",
       userSector: userSector ?? "",
+      userCompany: userCompany ?? "",
+      userEmail: userEmail ?? "",
       isLoggedIn: isLoggedIn === "true"
     }
   };

@@ -1,0 +1,99 @@
+.chartContainer {
+  background: var(--white);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--gray-line);
+  box-shadow: 0 4px 30px var(--shadow);
+  transition: var(--transition-smooth);
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.chartContainer h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--title);
+  border-bottom: 1px solid var(--gray-line);
+  padding-bottom: 0.5rem;
+}
+
+.barsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 120px;
+  padding: 0 0.5rem;
+}
+
+.barColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+  flex: 1;
+}
+
+.barTrack {
+  width: 12px;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+body.dark .barTrack {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.barFill {
+  width: 100%;
+  background: var(--blue-twitter);
+  border-radius: 6px;
+  transition: height 0.5s ease-out;
+  cursor: pointer;
+  position: relative;
+}
+
+.barFill:hover .barTooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.todayBar {
+  background: var(--green) !important;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+}
+
+.barTooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.dayLabel {
+  font-size: 0.75rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.todayLabel {
+  color: var(--green) !important;
+  font-weight: 700;
+}
