@@ -44,18 +44,22 @@ function HomeContent() {
       <Header />
       <ExperienceBar />
       <CountdownProvider>
-        <section>
-          <div>
+        <main className={styles.dashboardGrid}>
+          <div className={styles.leftColumn}>
             <Profile />
             <CompletedChallenges />
             <ActivityChart />
-            <Countdown />
           </div>
-          <div>
+          
+          <div className={styles.centerColumn}>
+            <Countdown />
             <ChallengeBox />
           </div>
-        </section>
-        <Leaderboard />
+          
+          <div className={styles.rightColumn}>
+            <Leaderboard />
+          </div>
+        </main>
       </CountdownProvider>
 
       {isSettingsModalOpen && <SettingsModal />}
