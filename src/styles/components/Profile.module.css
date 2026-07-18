@@ -211,3 +211,52 @@ body.dark .badgeTooltip {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
+
+/* Badge Tier Colors */
+.badgeCard.bronze.unlocked {
+  border-color: #cd7f32;
+  box-shadow: 0 0 10px rgba(205, 127, 50, 0.2);
+}
+.badgeCard.silver.unlocked {
+  border-color: #c0c0c0;
+  box-shadow: 0 0 10px rgba(192, 192, 192, 0.2);
+}
+.badgeCard.gold.unlocked {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+.badgeCard.diamond.unlocked {
+  border-color: #00ffff;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+}
+.badgeCard.legend.unlocked {
+  border-color: #bf55ec;
+  box-shadow: 0 0 15px rgba(191, 85, 236, 0.4);
+  animation: legendGlow 1.5s infinite alternate;
+}
+
+@keyframes legendGlow {
+  from {
+    box-shadow: 0 0 10px rgba(191, 85, 236, 0.3);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(191, 85, 236, 0.6);
+  }
+}
+
+/* Tooltip Tier Badges */
+.tierBadge {
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  margin-bottom: 0.25rem;
+  align-self: flex-start;
+  display: inline-block;
+}
+
+.bronzeText { background: rgba(205, 127, 50, 0.15); color: #cd7f32; }
+.silverText { background: rgba(192, 192, 192, 0.15); color: #b0b0b0; }
+.goldText { background: rgba(255, 215, 0, 0.15); color: #d4af37; }
+.diamondText { background: rgba(0, 255, 255, 0.15); color: #00bfff; }
+.legendText { background: rgba(191, 85, 236, 0.15); color: #bf55ec; }

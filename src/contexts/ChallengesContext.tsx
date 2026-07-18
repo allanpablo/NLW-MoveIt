@@ -15,6 +15,7 @@ export interface Badge {
     name: string;
     description: string;
     icon: string;
+    tier: 'bronze' | 'silver' | 'gold' | 'diamond' | 'legend';
 }
 
 export interface SectorInfo {
@@ -46,13 +47,13 @@ export interface UserDbEntry {
 }
 
 export const ALL_BADGES: Badge[] = [
-    { id: 'first_step', name: 'Primeiro Passo', description: 'Completou o primeiro desafio', icon: '🌱' },
-    { id: 'streak_3', name: 'Foco Inabalável', description: 'Alcançou uma sequência de 3 ciclos', icon: '🔥' },
-    { id: 'streak_5', name: 'Mestre da Produtividade', description: 'Alcançou uma sequência de 5 ciclos', icon: '⚡' },
-    { id: 'hydration_3', name: 'Super Hidratado', description: 'Bebeu água 3 vezes durante os ciclos', icon: '💧' },
-    { id: 'mind_3', name: 'Mente Serena', description: 'Concluiu 3 exercícios de meditação/respiração', icon: '🧘' },
-    { id: 'posture_3', name: 'Coluna de Aço', description: 'Ajustou a postura 3 vezes', icon: '📐' },
-    { id: 'level_5', name: 'Veterano', description: 'Alcançou o nível 5', icon: '🏆' },
+    { id: 'first_step', name: 'Primeiro Passo', description: 'Completou o primeiro desafio', icon: '🌱', tier: 'bronze' },
+    { id: 'posture_3', name: 'Coluna de Aço', description: 'Ajustou a postura 3 vezes', icon: '📐', tier: 'silver' },
+    { id: 'hydration_3', name: 'Super Hidratado', description: 'Bebeu água 3 vezes durante os ciclos', icon: '💧', tier: 'silver' },
+    { id: 'mind_3', name: 'Mente Serena', description: 'Concluiu 3 exercícios de meditação/respiração', icon: '🧘', tier: 'gold' },
+    { id: 'streak_3', name: 'Foco Inabalável', description: 'Alcançou uma sequência de 3 ciclos', icon: '🔥', tier: 'gold' },
+    { id: 'level_5', name: 'Veterano', description: 'Alcançou o nível 5', icon: '🏆', tier: 'diamond' },
+    { id: 'streak_5', name: 'Mestre da Produtividade', description: 'Alcançou uma sequência de 5 ciclos', icon: '⚡', tier: 'legend' },
 ];
 
 interface ChallengesContextData {
@@ -163,10 +164,10 @@ export function ChallengesProvider({
   }
 
   function updateProfile(name: string, company: string, sector: string, avatar: string) {
-    setUserName(name);
-    setUserCompany(company);
-    setUserSector(sector);
-    setUserAvatar(avatar);
+    setUserName(name.trim());
+    setUserCompany(company.trim());
+    setUserSector(sector.trim());
+    setUserAvatar(avatar.trim());
   }
 
   function completeBreakTask() {
@@ -274,18 +275,21 @@ export function ChallengesProvider({
     const existing = db.find(u => u.email === email);
     if (existing) return;
 
+    const cleanCompany = company.trim();
+    const cleanSector = sector.trim();
+
     const newUser: UserDbEntry = {
-      email,
-      password,
-      name,
-      company,
-      sector,
+      email: email.trim(),
+      password: password.trim(),
+      name: name.trim(),
+      company: cleanCompany,
+      sector: cleanSector,
       level: 1,
       currentExperience: 0,
       challengesCompleted: 0,
       currentStreak: 0,
       unlockedBadges: [],
-      avatar: avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${name}`
+      avatar: avatar.trim() || `https://api.dicebear.com/7.x/bottts/svg?seed=${name.trim()}`
     };
 
     db.push(newUser);

@@ -35,12 +35,13 @@ export function Profile(){
                         return (
                             <div 
                                 key={badge.id} 
-                                className={`${styles.badgeCard} ${isUnlocked ? styles.unlocked : styles.locked}`}
+                                className={`${styles.badgeCard} ${isUnlocked ? styles.unlocked : styles.locked} ${styles[badge.tier]}`}
                             >
                                 <span className={styles.badgeIcon}>{badge.icon}</span>
                                 <span className={styles.badgeName}>{badge.name}</span>
                                 
                                 <div className={styles.badgeTooltip}>
+                                    <span className={`${styles.tierBadge} ${styles[badge.tier + 'Text']}`}>{badge.tier.toUpperCase()}</span>
                                     <strong>{badge.name}</strong>
                                     <p>{badge.description}</p>
                                     <span className={isUnlocked ? styles.tooltipUnlocked : styles.tooltipLocked}>

@@ -7,7 +7,19 @@ export function Login() {
   const [isLoginMode, setIsLoginMode] = useState(true);
   
   const db = getUsersDatabase ? getUsersDatabase() : [];
-  const registeredCompanies = Array.from(new Set(db.map(u => u.company))).filter(Boolean);
+  
+  // Case-insensitive deduplication for companies
+  const uniqueCompaniesMap = new Map<string, string>();
+  db.forEach(u => {
+    if (u.company) {
+      const trimmed = u.company.trim();
+      const lower = trimmed.toLowerCase();
+      if (!uniqueCompaniesMap.has(lower)) {
+        uniqueCompaniesMap.set(lower, trimmed);
+      }
+    }
+  });
+  const registeredCompanies = Array.from(uniqueCompaniesMap.values());
   
   const defaultSectorNames = [
     'TI & Engenharia',
@@ -19,10 +31,19 @@ export function Login() {
     'Administrativo'
   ];
   
-  const registeredSectors = Array.from(new Set([
-    ...defaultSectorNames,
-    ...db.map(u => u.sector)
-  ])).filter(Boolean);
+  // Case-insensitive deduplication for sectors
+  const uniqueSectorsMap = new Map<string, string>();
+  defaultSectorNames.forEach(s => uniqueSectorsMap.set(s.toLowerCase(), s));
+  db.forEach(u => {
+    if (u.sector) {
+      const trimmed = u.sector.trim();
+      const lower = trimmed.toLowerCase();
+      if (!uniqueSectorsMap.has(lower)) {
+        uniqueSectorsMap.set(lower, trimmed);
+      }
+    }
+  });
+  const registeredSectors = Array.from(uniqueSectorsMap.values());
   
   // Input fields
   const [name, setName] = useState("");
